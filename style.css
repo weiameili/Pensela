@@ -1,0 +1,300 @@
+@import url("https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap");
+
+:root {
+  margin: 0;
+  padding: 0;
+  --colSelect: #b4deff;
+  --col1: #ffb4bd;
+  --col2: #b3fdd7;
+  --col3: #fff2b9;
+  --col4: #000;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.panel {
+  -webkit-app-region: no-drag;
+  margin: 0.5vh 0.5vw;
+  padding: 0px 10px;
+  width: 97vw;
+  height: 97vh;
+  background-color: rgb(8, 13, 15);
+  border-radius: 30px;
+  box-shadow: 0px 0px 5px 2px rgb(29, 48, 59);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.seperator {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  height: 90%;
+  font-size: 40px;
+  color: rgb(111, 153, 151);
+}
+
+.logo {
+  -webkit-app-region: drag;
+  height: 100%;
+  width: 80vh;
+  background-image: url("./assets/logo.png");
+  background-size: 75% 55%;
+  background-position: center;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  margin: auto 2vmin;
+}
+
+.tool-container {
+  -webkit-app-region: no-drag;
+  margin: auto 12.5vh;
+  height: 60vh;
+  padding: 2vh;
+  border-radius: 10px;
+}
+
+.tool-container.text {
+  -webkit-app-region: no-drag;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  font-size: 40px;
+  font-family: "Times New Roman", sans-serif;
+  color: #b3fdd7;
+  margin: auto 17.5vh;
+  height: 50vh;
+  width: 50vh;
+}
+
+.tool-item {
+  cursor: pointer;
+  box-shadow: 0px 0px 0.75px 0.75px #80caff;
+  transition: box-shadow 1s, color 2s, background-color 1s, background-image 1s;
+  border-radius: 10px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 50% 50%;
+}
+
+.tool-item.selected {
+  box-shadow: 0px 0px 3px 3px #80caff;
+}
+
+.tool-item:not(.main):hover {
+  box-shadow: 0px 0px 2px 2px #80caff;
+}
+
+.tool-item.main:hover {
+  box-shadow: 0px 0px 3px 3px #80caff;
+}
+
+.tool-item.main {
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 1;
+  grid-row-end: 3;
+}
+
+.tool-item.text.selected {
+  background-color: #b3fdd7;
+  color:rgb(8, 13, 15);
+}
+
+.tool-container.color {
+  width: 155vh;
+  display: grid;
+  grid-template-columns: auto auto auto auto auto;
+  grid-template-rows: auto auto;
+  grid-gap: 10px;
+}
+
+.tool-item.color.main {
+  background-color: var(--colSelect);
+}
+
+.tool-item.color.main {
+  cursor: default;
+  box-shadow: 0px 0px 0.75px 0.75px #80caff;
+}
+
+.tool-item.color.one {
+  background-color: var(--col1);
+}
+
+.tool-item.color.two {
+  background-color: var(--col2);
+}
+
+.tool-item.color.three {
+  background-color: var(--col3);
+}
+
+.tool-item.color.four {
+  background-color: var(--col4);
+}
+
+.tool-item.color.transparent {
+  background-image: url("./assets/icons/transparent.png");
+  background-size: 900% 900%;
+}
+
+.tool-item.color.custom {
+  background-image: url("./assets/icons/multicolor.png");
+  background-size: 100% 100%;
+}
+
+.tool-container.shapes {
+  width: 125vh;
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  grid-gap: 10px;
+}
+
+.tool-item.shapes.selected {
+  background-color: #fff2b9;
+}
+
+.tool-item.shapes.polygon {
+  background-image: url("./assets/icons/polygon.png");
+}
+
+.tool-item.shapes.circle {
+  background-image: url("./assets/icons/circle.png");
+}
+
+.tool-item.shapes.line {
+  background-image: url("./assets/icons/line.png");
+}
+
+.tool-item.shapes.square {
+  background-image: url("./assets/icons/square.png");
+}
+
+.tool-item.shapes.triangle {
+  background-image: url("./assets/icons/triangle.png");
+}
+
+.tool-item.shapes.polygon.selected {
+  background-image: url("./assets/icons/dark/polygon.png");
+}
+
+.tool-item.shapes.circle.selected {
+  background-image: url("./assets/icons/dark/circle.png");
+}
+
+.tool-item.shapes.line.selected {
+  background-image: url("./assets/icons/dark/line.png");
+}
+
+.tool-item.shapes.square.selected {
+  background-image: url("./assets/icons/dark/square.png");
+}
+
+.tool-item.shapes.triangle.selected {
+  background-image: url("./assets/icons/dark/triangle.png");
+}
+
+.tool-container.win-controls {
+  width: 125vh;
+  display: grid;
+  grid-template-columns: 25vh 25vh 25vh 25vh;
+  grid-template-rows: auto auto;
+  grid-gap: 10px;
+}
+
+.tool-item.win-controls {
+  color: #b3fdd7;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-family: "Fredoka One", cursive;
+}
+
+.tool-item.win-controls.selected {
+  background-color: #93ebb0;
+}
+
+.tool-item.tool-item.win-controls.visible {
+  background-image: url("./assets/icons/visible.png");
+}
+
+.tool-item.tool-item.win-controls.invisible {
+  background-image: url("./assets/icons/invisible.png");
+}
+
+.tool-item.tool-item.win-controls.mouse {
+  background-image: url("./assets/icons/pointer.png");
+}
+
+.tool-item.win-controls.drag {
+  background-image: url("./assets/icons/move.png");
+}
+
+.tool-item.win-controls.mouse.selected {
+  background-image: url("./assets/icons/dark/pointer.png");
+}
+
+.tool-item.win-controls.drag.selected {
+  background-image: url("./assets/icons/dark/move.png");
+}
+
+.tool-container.sticker {
+  width: 125vh;
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  grid-gap: 10px;
+}
+
+.tool-item.sticker.selected {
+  background-color: #ffb4bd;
+}
+
+.tool-item.sticker.tick {
+  background-image: url("./assets/icons/tick.png");
+}
+
+.tool-item.sticker.cross {
+  background-image: url("./assets/icons/cross.png");
+}
+
+.tool-item.sticker.star {
+  background-image: url("./assets/icons/star.png");
+}
+
+.tool-item.sticker.pen {
+  background-image: url("./assets/icons/stroke.png");
+}
+
+.tool-item.sticker.eraser {
+  background-image: url("./assets/icons/eraser.png");
+}
+
+.tool-item.sticker.tick.selected {
+  background-image: url("./assets/icons/dark/tick.png");
+}
+
+.tool-item.sticker.cross.selected {
+  background-image: url("./assets/icons/dark/cross.png");
+}
+
+.tool-item.sticker.star.selected {
+  background-image: url("./assets/icons/dark/star.png");
+}
+
+.tool-item.sticker.pen.selected {
+  background-image: url("./assets/icons/dark/stroke.png");
+}
+
+.tool-item.sticker.eraser.selected {
+  background-image: url("./assets/icons/dark/eraser.png");
+}

@@ -1,0 +1,24 @@
+{
+  "name": "pensela",
+  "version": "1.0.0",
+  "description": "A Simple Yet Complete Screen Annotation Tool",
+  "main": "index.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder build -wl --publish never --x64 --ia32 --config ./electron-builder.json",
+    "deploy": "electron-builder build -wl --publish always --x64 --ia32 --config ./electron-builder.json"
+  },
+  "author": "Wali Waqar",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^11.2.3"
+  },
+  "dependencies": {
+    "jquery": "^3.6.0",
+    "konva": "^7.2.5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/weiameili/Pensela"
+  }
+}

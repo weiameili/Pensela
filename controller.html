@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pensela</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="panel">
+      <div class="logo"></div>
+      <div class="tool-container text tool-item">T</div>
+      <div class="tool-container color">
+        <div class="tool-item color main" colorData="b4deff"></div>
+        <div class="tool-item color secondary one" colorData="ffb4bd"></div>
+        <div class="tool-item color secondary two" colorData="b3fdd7"></div>
+        <div class="tool-item color secondary three" colorData="fff2b9"></div>
+        <div class="tool-item color secondary four" colorData="000"></div>
+        <div
+          class="tool-item color secondary transparent"
+          colorData="00000000"
+        ></div>
+        <div class="tool-item color secondary custom"></div>
+      </div>
+      <div class="tool-container shapes">
+        <div class="tool-item shapes polygon"></div>
+        <div class="tool-item shapes main line"></div>
+        <div class="tool-item shapes square"></div>
+        <div class="tool-item shapes triangle"></div>
+        <div class="tool-item shapes circle"></div>
+      </div>
+      <div class="tool-container sticker">
+        <div class="tool-item sticker tick"></div>
+        <div class="tool-item sticker cross"></div>
+        <div class="tool-item sticker star"></div>
+        <div class="tool-item sticker pen main"></div>
+        <div class="tool-item sticker eraser"></div>
+      </div>
+      <div class="tool-container win-controls">
+        <div class="tool-item win-controls mouse main selected"></div>
+        <div class="tool-item win-controls drag"></div>
+        <div class="tool-item win-controls exit">✖</div>
+        <div class="tool-item win-controls visibility visible"></div>
+        <div class="tool-item win-controls minimize">_</div>
+      </div>
+    </div>
+  </body>
+  <script src="./scripts/controller.js"></script>
+</html>

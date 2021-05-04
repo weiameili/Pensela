@@ -1,0 +1,31 @@
+:root {
+    margin: 0px;
+    padding: 0px;
+}
+
+body {
+    margin: 0px;
+    padding: 0px;  
+    overflow-y: hidden; 
+    overflow-x: hidden;
+}
+
+*:focus {
+    outline: 0px;
+}
+
+div {
+    padding: 0px;
+    margin: 0px;
+}
+
+.textInp {
+    position: absolute;
+    top: 0px; left: 0px;
+    background-color: rgba(0, 0, 0, 1);
+    resize: none;
+    font-family: 'calibri', sans-serif;
+    font-size: 35;
+    font-weight: bold;
+    line-height: 30px;
+}
