@@ -61,7 +61,7 @@ Any kind of contribution is welcome
 5. Push to the Branch 
 6. Open a Pull Request
 
-Feel free to report an issue or request a feature [here]("https://github.com/weiameili/Pensela/issues")
+Feel free to report an issue or request a feature in the Issues Section.
 
 ---
 
