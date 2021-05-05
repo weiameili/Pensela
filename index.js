@@ -1,6 +1,6 @@
 const { app, BrowserWindow, ipcMain, screen } = require("electron");
 const os = require("os");
-const path = require("path")
+const path = require("path");
 
 function createWindow() {
   const board = new BrowserWindow({
@@ -12,7 +12,7 @@ function createWindow() {
     },
     transparent: true,
     frame: false,
-    icon: path.join(__dirname, '/assets/Icon-512x512.png')
+    icon: path.join(__dirname, "/assets/Icon-512x512.png"),
   });
   board.setAlwaysOnTop(true, "screen");
   board.loadFile("board.html");
@@ -160,10 +160,8 @@ function createWindow() {
   }
 }
 
-if(process.platform === "linux") {
-  app.commandLine.appendSwitch('enable-transparent-visuals');
-  app.disableHardwareAcceleration();
-}
+app.commandLine.appendSwitch("enable-transparent-visuals");
+app.disableHardwareAcceleration();
 
 app.whenReady().then(() => {
   os.platform() == "linux" ? setTimeout(createWindow, 1000) : createWindow();
