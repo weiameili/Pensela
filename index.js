@@ -1,8 +1,6 @@
 const { app, BrowserWindow, ipcMain, screen } = require("electron");
 const os = require("os");
-let tray = null;
-const { session } = require("electron");
-
+const path = require("path")
 
 function createWindow() {
   const board = new BrowserWindow({
@@ -14,7 +12,7 @@ function createWindow() {
     },
     transparent: true,
     frame: false,
-    icon: "./assets/logo.png",
+    icon: path.join(__dirname, '/assets/Icon-512x512.png')
   });
   board.setAlwaysOnTop(true, "screen");
   board.loadFile("board.html");
@@ -132,7 +130,7 @@ function createWindow() {
 
   ipcMain.on("hideBoard", () => {
     board.hide();
-    controller.setAlwaysOnTop(true, "screen")
+    controller.setAlwaysOnTop(true, "screen");
   });
   ipcMain.on("showBoard", () => {
     board.show();
@@ -141,23 +139,30 @@ function createWindow() {
   });
 
   ipcMain.on("minimizeWin", () => {
+    board.show();
+    controller.hide();
+    controller.show();
     board.minimize();
   });
   ipcMain.on("closeWin", () => {
     board.close();
   });
 
-  if(os.platform == "win32") {
+  if (os.platform() == "win32") {
     setTimeout(() => {
-      board.minimize()
-      board.restore()
-      board.hide()
-      board.show()
-      controller.hide()
-      controller.show()
-  }, 1000)
+      board.minimize();
+      board.restore();
+      board.hide();
+      board.show();
+      controller.hide();
+      controller.show();
+    }, 1000);
+  }
 }
 
+if(process.platform === "linux") {
+  app.commandLine.appendSwitch('enable-transparent-visuals');
+  app.disableHardwareAcceleration();
 }
 
 app.whenReady().then(() => {
