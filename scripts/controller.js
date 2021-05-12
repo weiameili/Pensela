@@ -105,7 +105,7 @@ $(".tool-item.pen").on("click", () => {
   ipcRenderer.send("drawFreehand");
 });
 
-$(".tool-item.mouse, .tool-item.drag").on("click", (e) => {
+$(".tool-item.mouse, .tool-item.drag, .tool-item.laser").on("click", (e) => {
   ipcRenderer.send("resetBoard");
   $(".tool-item.win-controls.main").toggleClass("main");
   $(e.target).toggleClass("main");

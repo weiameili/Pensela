@@ -210,9 +210,9 @@ body {
 }
 
 .tool-container.win-controls {
-  width: 210vh;
+  width: 125vh;
   display: grid;
-  grid-template-columns: 25vh 25vh 25vh 25vh 25vh 25vh 25vh;
+  grid-template-columns: 25vh 25vh 25vh 25vh;
   grid-template-rows: 25vh 25vh;
   grid-gap: 10px;
 }
@@ -254,20 +254,16 @@ body {
   background-image: url("./assets/icons/laser.png");
 }
 
-.tool-item.win-controls.undo {
-  background-image: url("./assets/icons/undo.png");
-}
-
-.tool-item.win-controls.redo {
-  background-image: url("./assets/icons/redo.png");
-}
-
 .tool-item.win-controls.mouse.selected {
   background-image: url("./assets/icons/dark/pointer.png");
 }
 
 .tool-item.win-controls.drag.selected {
   background-image: url("./assets/icons/dark/move.png");
+}
+
+.tool-item.win-controls.laser.selected {
+  background-image: url("./assets/icons/dark/laser.png");
 }
 
 .tool-container.sticker {
@@ -349,4 +345,29 @@ body {
 
 .tool-item.sticker.eraser.selected {
   background-image: url("./assets/icons/dark/eraser.png");
+}
+
+.tool-container.alt-controls {
+  width: 90vh;
+  display: grid;
+  grid-template-columns: 25vh 25vh 25vh;
+  grid-template-rows: 25vh 25vh;
+  grid-gap: 10px;
+}
+
+.tool-item.alt-controls {
+  color: #b3f6ff;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-family: "Fredoka One", cursive;
+}
+
+.tool-item.alt-controls.undo {
+  background-image: url("./assets/icons/undo.png");
+}
+
+.tool-item.alt-controls.redo {
+  background-image: url("./assets/icons/redo.png");
 }
