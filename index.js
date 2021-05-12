@@ -19,7 +19,7 @@ function createWindow() {
   board.setResizable(false);
 
   const controller = new BrowserWindow({
-    width: 1025,
+    width: 1525,
     height: 120,
     webPreferences: {
       nodeIntegration: true,

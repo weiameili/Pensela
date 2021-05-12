@@ -74,7 +74,7 @@ $(".tool-item.triangle").on("click", () => {
   ipcRenderer.send("drawTriangle");
 });
 
-$(".tool-item.sticker:not(.eraser)").on("click", (e) => {
+$(".tool-item.sticker:not(.eraser):not(.clear)").on("click", (e) => {
   ipcRenderer.send("resetBoard");
   ipcRenderer.send("setMode", "draw");
   $(".tool-item.sticker.main").toggleClass("main");
