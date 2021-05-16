@@ -56,6 +56,26 @@ function createWindow() {
     picker.setResizable(false);
   }
 
+  function openBackgroundDialog() {
+    const dialog = new BrowserWindow({
+      width: 325,
+      height: 450,
+      webPreferences: {
+        nodeIntegration: true,
+        devTools: true,
+      },
+      transparent: true,
+      frame: false,
+      skipTaskbar: true,
+      parent: board,
+      icon: "./assets/logo.png",
+    });
+    dialog.setPosition(500, 300);
+    dialog.setAlwaysOnTop(true, "screen");
+    dialog.loadFile("background.html");
+    dialog.setResizable(false);
+  }
+
   controller.on("closed", () => {
     if (process.platform !== "darwin") {
       app.quit();
@@ -147,6 +167,15 @@ function createWindow() {
   ipcMain.on("closeWin", () => {
     board.close();
   });
+
+  ipcMain.on("bgSelect", () => {
+    openBackgroundDialog()
+  })
+  ipcMain.on("bgUpdate", (e, arg) => controller.webContents.send("bgUpdate", arg))
+  ipcMain.on("bgSubmit", (e, arg) => {
+    board.webContents.send("bgSelect", arg)
+    board.focus()
+  })
 
   if (os.platform() == "win32") {
     setTimeout(() => {

@@ -132,3 +132,11 @@ $(".tool-item.exit").on("click", () => {
 $(".tool-item.minimize").on("click", () => {
   ipcRenderer.send("minimizeWin");
 });
+
+$(".tool-item.bg").on("click", () => {
+  ipcRenderer.send("bgSelect")
+})
+ipcRenderer.on("bgUpdate", (e, arg) => {
+  $(".tool-item.bg").css("background", arg )
+  $(".tool-item.bg").css("background-size", "400% 400%")
+})

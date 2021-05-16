@@ -16,7 +16,7 @@ let masterBoard = new Konva.Rect({
   y: 0,
   width: window.innerWidth,
   height: window.innerHeight,
-  fill: "#00000000",
+  fill: boardState.bg,
   stroke: "black",
   strokeWidth: 0,
 });
@@ -82,7 +82,7 @@ const f2 = (e, a) => {
 };
 
 ipcRenderer.on("drawSquare", () => {
-  masterBoard.attrs.fill = "#00000001";
+  masterBoard.attrs.fill = (boardState.bg.length < 8)? boardState.bg:"#00000001";
   layer.add(masterBoard);
   stage.add(layer);
   stage.container().style.cursor = "crosshair";
@@ -119,7 +119,7 @@ ipcRenderer.on("drawSquare", () => {
 });
 
 ipcRenderer.on("drawCircle", () => {
-  masterBoard.attrs.fill = "#00000001";
+  masterBoard.attrs.fill = (boardState.bg.length < 8)? boardState.bg:"#00000001";
   layer.add(masterBoard);
   stage.add(layer);
   stage.container().style.cursor = "crosshair";
@@ -159,7 +159,7 @@ ipcRenderer.on("drawCircle", () => {
 });
 
 ipcRenderer.on("drawLine", () => {
-  masterBoard.attrs.fill = "#00000001";
+  masterBoard.attrs.fill = (boardState.bg.length < 8)? boardState.bg:"#00000001";
   layer.add(masterBoard);
   stage.add(layer);
   stage.container().style.cursor = "crosshair";
@@ -192,7 +192,7 @@ ipcRenderer.on("drawLine", () => {
 });
 
 ipcRenderer.on("drawTriangle", () => {
-  masterBoard.attrs.fill = "#00000001";
+  masterBoard.attrs.fill = (boardState.bg.length < 8)? boardState.bg:"#00000001";
   layer.add(masterBoard);
   stage.add(layer);
   stage.container().style.cursor = "crosshair";
@@ -236,7 +236,7 @@ ipcRenderer.on("drawTriangle", () => {
 });
 
 ipcRenderer.on("drawPolygon", () => {
-  masterBoard.attrs.fill = "#00000001";
+  masterBoard.attrs.fill = (boardState.bg.length < 8)? boardState.bg:"#00000001";
   layer.add(masterBoard);
   stage.add(layer);
   stage.container().style.cursor = "crosshair";
@@ -287,7 +287,7 @@ ipcRenderer.on("drawPolygon", () => {
 });
 
 ipcRenderer.on("drawCross", () => {
-  masterBoard.attrs.fill = "#00000001";
+  masterBoard.attrs.fill = (boardState.bg.length < 8)? boardState.bg:"#00000001";
   layer.add(masterBoard);
   stage.add(layer);
   stage.container().style.cursor = "crosshair";
@@ -341,7 +341,7 @@ ipcRenderer.on("drawCross", () => {
 });
 
 ipcRenderer.on("drawStar", () => {
-  masterBoard.attrs.fill = "#00000001";
+  masterBoard.attrs.fill = (boardState.bg.length < 8)? boardState.bg:"#00000001";
   layer.add(masterBoard);
   stage.add(layer);
   stage.container().style.cursor = "crosshair";
@@ -393,7 +393,7 @@ ipcRenderer.on("drawStar", () => {
 });
 
 ipcRenderer.on("drawTick", () => {
-  masterBoard.attrs.fill = "#00000001";
+  masterBoard.attrs.fill = (boardState.bg.length < 8)? boardState.bg:"#00000001";
   layer.add(masterBoard);
   stage.add(layer);
   stage.container().style.cursor = "crosshair";
@@ -435,7 +435,7 @@ ipcRenderer.on("drawTick", () => {
 });
 
 ipcRenderer.on("drawFreehand", () => {
-  masterBoard.attrs.fill = "#00000001";
+  masterBoard.attrs.fill = (boardState.bg.length < 8)? boardState.bg:"#00000001";
   layer.add(masterBoard);
   stage.add(layer);
   stage.container().style.cursor = "crosshair";
@@ -468,7 +468,7 @@ ipcRenderer.on("drawFreehand", () => {
 });
 
 ipcRenderer.on("textMode", () => {
-  masterBoard.attrs.fill = "#00000001";
+  masterBoard.attrs.fill = (boardState.bg.length < 8)? boardState.bg:"#00000001";
   layer.add(masterBoard);
   stage.add(layer);
   stage.container().style.cursor = "text";
@@ -497,7 +497,7 @@ ipcRenderer.on("textMode", () => {
 });
 
 ipcRenderer.on("dragMode", () => {
-  masterBoard.attrs.fill = "#00000001";
+  masterBoard.attrs.fill = (boardState.bg.length < 8)? boardState.bg:"#00000001";
   layer.add(masterBoard);
   stage.add(layer);
   stage.container().style.cursor = "move";
@@ -509,13 +509,13 @@ ipcRenderer.on("dragMode", () => {
 
 ipcRenderer.on("eraserMode", () => {
   stage.container().style.cursor = "crosshair";
-  masterBoard.attrs.fill = "#00000001";
+  masterBoard.attrs.fill = (boardState.bg.length < 8)? boardState.bg:"#00000001";
   layer.add(masterBoard);
   stage.add(layer);
 });
 
 ipcRenderer.on("resetBoard", () => {
-  masterBoard.attrs.fill = "#00000000";
+  masterBoard.attrs.fill = boardState.bg;
   stage.container().style.cursor = "default";
   for (i = 1; i < layer.children.length; i++) {
     layer.children[i].draggable(false);
@@ -542,3 +542,10 @@ ipcRenderer.on("resetBoard", () => {
   layer.add(masterBoard);
   stage.add(layer);
 });
+
+ipcRenderer.on("bgSelect", (e, arg) => {
+  boardState.bg = "#" + arg
+  masterBoard.attrs.fill = boardState.bg;
+  layer.add(masterBoard);
+  stage.add(layer);
+})
