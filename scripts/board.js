@@ -556,3 +556,5 @@ ipcRenderer.on("clearBoard", () => {
   }
   stage.add(layer)
 })
+
+ipcRenderer.on("laserCursor", () => {document.getElementById("container").style.cursor = 'url("./assets/icons/laser-pointer.png") 2 2, pointer'})

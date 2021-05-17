@@ -144,3 +144,7 @@ ipcRenderer.on("bgUpdate", (e, arg) => {
 $(".tool-item.clear").on("click", () => {
   ipcRenderer.send("clearBoard")
 })
+
+$(".tool-item.laser").on("click", () => {
+  ipcRenderer.send("laserCursor")
+})

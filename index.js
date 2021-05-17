@@ -179,6 +179,8 @@ function createWindow() {
 
   ipcMain.on("clearBoard", () => board.webContents.send("clearBoard"))
 
+  ipcMain.on("laserCursor", () => board.webContents.send("laserCursor"))
+
   if (os.platform() == "win32") {
     setTimeout(() => {
       board.minimize();
