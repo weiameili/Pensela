@@ -177,6 +177,8 @@ function createWindow() {
     board.focus()
   })
 
+  ipcMain.on("clearBoard", () => board.webContents.send("clearBoard"))
+
   if (os.platform() == "win32") {
     setTimeout(() => {
       board.minimize();

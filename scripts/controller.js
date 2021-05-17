@@ -140,3 +140,7 @@ ipcRenderer.on("bgUpdate", (e, arg) => {
   $(".tool-item.bg").css("background", arg )
   $(".tool-item.bg").css("background-size", "400% 400%")
 })
+
+$(".tool-item.clear").on("click", () => {
+  ipcRenderer.send("clearBoard")
+})

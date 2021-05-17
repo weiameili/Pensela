@@ -549,3 +549,10 @@ ipcRenderer.on("bgSelect", (e, arg) => {
   layer.add(masterBoard);
   stage.add(layer);
 })
+
+ipcRenderer.on("clearBoard", () => {
+  for (let i = 1; i < layer.children.length;) {
+    layer.children[1].remove()
+  }
+  stage.add(layer)
+})
