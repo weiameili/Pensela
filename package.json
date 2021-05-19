@@ -18,7 +18,8 @@
   },
   "dependencies": {
     "jquery": "^3.6.0",
-    "konva": "^7.2.5"
+    "konva": "^7.2.5",
+    "screenshot-desktop": "^1.12.3"
   },
   "repository": {
     "type": "git",

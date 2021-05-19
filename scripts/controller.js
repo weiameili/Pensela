@@ -151,3 +151,5 @@ $(".tool-item.laser").on("click", () => {
 
 $(".tool-item.undo").on("click", () => ipcRenderer.send("undo"))
 $(".tool-item.redo").on("click", () => ipcRenderer.send("redo"))
+
+$(".tool-item.screenshot").on("click", () => ipcRenderer.send("screenshot"))

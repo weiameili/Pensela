@@ -17,7 +17,7 @@ let masterBoard = new Konva.Rect({
   width: window.innerWidth,
   height: window.innerHeight,
   fill: boardState.bg,
-  stroke: "black",
+  stroke: "#ffffff",
   strokeWidth: 0,
 });
 layer.add(masterBoard);
@@ -276,9 +276,9 @@ ipcRenderer.on("drawPolygon", () => {
         strokeWidth: 5,
       });
       c.on("finish", () => {
-        anim.stop()
-        inDraw = false
-      })
+        anim.stop();
+        inDraw = false;
+      });
       c.on("click tap", (e) => {
         if (boardState.mode == "eraser") {
           boardState.after = [];
@@ -554,7 +554,7 @@ ipcRenderer.on("eraserMode", () => {
 
 ipcRenderer.on("resetBoard", () => {
   if (inDraw) {
-    layer.children[layer.children.length - 1].fire("finish")
+    layer.children[layer.children.length - 1].fire("finish");
   }
   masterBoard.attrs.fill = boardState.bg;
   stage.container().style.cursor = "default";
@@ -630,4 +630,15 @@ document.addEventListener("keydown", (e) => {
       stepForward();
     }
   }
+});
+
+ipcRenderer.on("screenshot", () => {
+  masterBoard.strokeWidth(10)
+  layer.add(masterBoard);
+  stage.add(layer);
+  setTimeout(() => {
+    masterBoard.strokeWidth(0)
+    layer.add(masterBoard);
+    stage.add(layer);
+  }, 100);
 });

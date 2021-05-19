@@ -1,6 +1,8 @@
 const { app, BrowserWindow, ipcMain, screen } = require("electron");
 const os = require("os");
 const path = require("path");
+const fs = require("fs")
+const screenshot = require("screenshot-desktop")
 
 function createWindow() {
   const board = new BrowserWindow({
@@ -183,6 +185,15 @@ function createWindow() {
 
   ipcMain.on("undo", () => board.webContents.send("undo"))
   ipcMain.on("redo", () => board.webContents.send("redo"))
+
+  ipcMain.on("screenshot", () => {
+    let d = new Date()
+    if(!fs.existsSync(os.homedir() + "/Pictures/Pensela")) {
+      fs.mkdirSync(os.homedir() + "/Pictures/Pensela")
+    }
+    screenshot({filename: os.homedir() + "/Pictures/Pensela/Screenshot " + ("0" + d.getDate()).slice(-2) + "-" + ("0" + (d.getMonth() + 1)).slice(-2) + "-" + d.getFullYear() + " " + d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds() + ".png"})
+    board.webContents.send("screenshot")
+  })
 
   if (os.platform() == "win32") {
     setTimeout(() => {
