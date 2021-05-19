@@ -148,3 +148,6 @@ $(".tool-item.clear").on("click", () => {
 $(".tool-item.laser").on("click", () => {
   ipcRenderer.send("laserCursor")
 })
+
+$(".tool-item.undo").on("click", () => ipcRenderer.send("undo"))
+$(".tool-item.redo").on("click", () => ipcRenderer.send("redo"))

@@ -1,7 +1,7 @@
 const Konva = require("konva");
 
 const stage = new Konva.Stage({
-  container: "container", 
+  container: "container",
   width: window.innerWidth,
   height: window.innerHeight,
 });
@@ -39,7 +39,9 @@ stage.on("mousemove touchmove", () => {
 });
 
 const f1 = (e) => {
-  c = layer.children[layer.children.length - 1]
+  boardState.after = [];
+  boardState.before.push(layer.children.slice(1, layer.children.length));
+  c = layer.children[layer.children.length - 1];
   layer.children[layer.children.length - 1].remove();
   if (e.key.length == 1) {
     c = new Konva.Text({
@@ -75,23 +77,21 @@ const f1 = (e) => {
 
 const f2 = (e, a) => {
   if (e.key == "Enter") {
-    inDraw = false
+    inDraw = false;
     a.stop();
-    
   }
 };
 
 ipcRenderer.on("drawSquare", () => {
-  masterBoard.attrs.fill = (boardState.bg.length < 8)? boardState.bg:"#00000001";
+  masterBoard.attrs.fill =
+    boardState.bg.length < 8 ? boardState.bg : "#00000001";
   layer.add(masterBoard);
   stage.add(layer);
   stage.container().style.cursor = "crosshair";
 
   let anim = new Konva.Animation((f) => {
-    c.attrs.width =
-      x - c.attrs.x;
-    c.attrs.height =
-      y - c.attrs.y;
+    c.attrs.width = x - c.attrs.x;
+    c.attrs.height = y - c.attrs.y;
   }, layer);
   stage.on("mousedown touchstart", () => {
     c = new Konva.Rect({
@@ -105,10 +105,14 @@ ipcRenderer.on("drawSquare", () => {
     });
     c.on("click tap", (e) => {
       if (boardState.mode == "eraser") {
-        e.target.destroy();
+        boardState.after = [];
+        boardState.before.push(layer.children.slice(1, layer.children.length));
+        e.target.remove();
         stage.add(layer);
       }
     });
+    boardState.after = [];
+    boardState.before.push(layer.children.slice(1, layer.children.length));
     layer.add(c);
     stage.add(layer);
     anim.start();
@@ -119,18 +123,15 @@ ipcRenderer.on("drawSquare", () => {
 });
 
 ipcRenderer.on("drawCircle", () => {
-  masterBoard.attrs.fill = (boardState.bg.length < 8)? boardState.bg:"#00000001";
+  masterBoard.attrs.fill =
+    boardState.bg.length < 8 ? boardState.bg : "#00000001";
   layer.add(masterBoard);
   stage.add(layer);
   stage.container().style.cursor = "crosshair";
 
   let anim = new Konva.Animation((f) => {
-    c.attrs.radiusX = Math.abs(
-      x - c.attrs.x
-    );
-    c.attrs.radiusY = Math.abs(
-      y - c.attrs.y
-    );
+    c.attrs.radiusX = Math.abs(x - c.attrs.x);
+    c.attrs.radiusY = Math.abs(y - c.attrs.y);
   }, layer);
   stage.on("mousedown touchstart", () => {
     c = new Konva.Ellipse({
@@ -144,22 +145,26 @@ ipcRenderer.on("drawCircle", () => {
     });
     c.on("click tap", (e) => {
       if (boardState.mode == "eraser") {
-        e.target.destroy();
+        boardState.after = [];
+        boardState.before.push(layer.children.slice(1, layer.children.length));
+        e.target.remove();
         stage.add(layer);
       }
     });
+    boardState.after = [];
+    boardState.before.push(layer.children.slice(1, layer.children.length));
     layer.add(c);
     stage.add(layer);
     anim.start();
   });
   stage.on("mouseup touchend", () => {
     anim.stop();
-    ;
   });
 });
 
 ipcRenderer.on("drawLine", () => {
-  masterBoard.attrs.fill = (boardState.bg.length < 8)? boardState.bg:"#00000001";
+  masterBoard.attrs.fill =
+    boardState.bg.length < 8 ? boardState.bg : "#00000001";
   layer.add(masterBoard);
   stage.add(layer);
   stage.container().style.cursor = "crosshair";
@@ -177,22 +182,26 @@ ipcRenderer.on("drawLine", () => {
     });
     c.on("click tap", (e) => {
       if (boardState.mode == "eraser") {
-        e.target.destroy();
+        boardState.after = [];
+        boardState.before.push(layer.children.slice(1, layer.children.length));
+        e.target.remove();
         stage.add(layer);
       }
     });
+    boardState.after = [];
+    boardState.before.push(layer.children.slice(1, layer.children.length));
     layer.add(c);
     stage.add(layer);
     anim.start();
   });
   stage.on("mouseup touchend", () => {
     anim.stop();
-    ;
   });
 });
 
 ipcRenderer.on("drawTriangle", () => {
-  masterBoard.attrs.fill = (boardState.bg.length < 8)? boardState.bg:"#00000001";
+  masterBoard.attrs.fill =
+    boardState.bg.length < 8 ? boardState.bg : "#00000001";
   layer.add(masterBoard);
   stage.add(layer);
   stage.container().style.cursor = "crosshair";
@@ -200,14 +209,7 @@ ipcRenderer.on("drawTriangle", () => {
   let anim = new Konva.Animation((f) => {
     let ox = c.attrs.ox;
     let oy = c.attrs.oy;
-    c.attrs.points = [
-      ox + (x - ox) / 2,
-      oy,
-      ox,
-      y,
-      x,
-      y,
-    ];
+    c.attrs.points = [ox + (x - ox) / 2, oy, ox, y, x, y];
   }, layer);
   stage.on("mousedown touchstart", () => {
     c = new Konva.Line({
@@ -221,22 +223,26 @@ ipcRenderer.on("drawTriangle", () => {
     });
     c.on("click tap", (e) => {
       if (boardState.mode == "eraser") {
-        e.target.destroy();
+        boardState.after = [];
+        boardState.before.push(layer.children.slice(1, layer.children.length));
+        e.target.remove();
         stage.add(layer);
       }
     });
+    boardState.after = [];
+    boardState.before.push(layer.children.slice(1, layer.children.length));
     layer.add(c);
     stage.add(layer);
     anim.start();
   });
   stage.on("mouseup touchend", () => {
     anim.stop();
-    ;
   });
 });
 
 ipcRenderer.on("drawPolygon", () => {
-  masterBoard.attrs.fill = (boardState.bg.length < 8)? boardState.bg:"#00000001";
+  masterBoard.attrs.fill =
+    boardState.bg.length < 8 ? boardState.bg : "#00000001";
   layer.add(masterBoard);
   stage.add(layer);
   stage.container().style.cursor = "crosshair";
@@ -254,7 +260,7 @@ ipcRenderer.on("drawPolygon", () => {
         Math.abs(c.attrs.points[1] - y) < 10
       ) {
         anim.stop();
-        inDraw = false
+        inDraw = false;
       } else {
         c.attrs.points.push(x);
         c.attrs.points.push(y);
@@ -271,14 +277,20 @@ ipcRenderer.on("drawPolygon", () => {
       });
       c.on("click tap", (e) => {
         if (boardState.mode == "eraser") {
-          e.target.destroy();
+          boardState.after = [];
+          boardState.before.push(
+            layer.children.slice(1, layer.children.length)
+          );
+          e.target.remove();
           stage.add(layer);
         }
       });
+      boardState.after = [];
+      boardState.before.push(layer.children.slice(1, layer.children.length));
       layer.add(c);
       stage.add(layer);
       anim.start();
-      inDraw = true
+      inDraw = true;
     }
   });
   container.addEventListener("keydown", (e) => {
@@ -287,7 +299,8 @@ ipcRenderer.on("drawPolygon", () => {
 });
 
 ipcRenderer.on("drawCross", () => {
-  masterBoard.attrs.fill = (boardState.bg.length < 8)? boardState.bg:"#00000001";
+  masterBoard.attrs.fill =
+    boardState.bg.length < 8 ? boardState.bg : "#00000001";
   layer.add(masterBoard);
   stage.add(layer);
   stage.container().style.cursor = "crosshair";
@@ -330,18 +343,22 @@ ipcRenderer.on("drawCross", () => {
     });
     c.on("click tap", (e) => {
       if (boardState.mode == "eraser") {
-        e.target.destroy();
+        boardState.after = [];
+        boardState.before.push(layer.children.slice(1, layer.children.length));
+        e.target.remove();
         stage.add(layer);
       }
     });
+    boardState.after = [];
+    boardState.before.push(layer.children.slice(1, layer.children.length));
     layer.add(c);
     stage.add(layer);
-    ;
   });
 });
 
 ipcRenderer.on("drawStar", () => {
-  masterBoard.attrs.fill = (boardState.bg.length < 8)? boardState.bg:"#00000001";
+  masterBoard.attrs.fill =
+    boardState.bg.length < 8 ? boardState.bg : "#00000001";
   layer.add(masterBoard);
   stage.add(layer);
   stage.container().style.cursor = "crosshair";
@@ -382,18 +399,22 @@ ipcRenderer.on("drawStar", () => {
     });
     c.on("click tap", (e) => {
       if (boardState.mode == "eraser") {
-        e.target.destroy();
+        boardState.after = [];
+        boardState.before.push(layer.children.slice(1, layer.children.length));
+        e.target.remove();
         stage.add(layer);
       }
     });
+    boardState.after = [];
+    boardState.before.push(layer.children.slice(1, layer.children.length));
     layer.add(c);
     stage.add(layer);
-    ;
   });
 });
 
 ipcRenderer.on("drawTick", () => {
-  masterBoard.attrs.fill = (boardState.bg.length < 8)? boardState.bg:"#00000001";
+  masterBoard.attrs.fill =
+    boardState.bg.length < 8 ? boardState.bg : "#00000001";
   layer.add(masterBoard);
   stage.add(layer);
   stage.container().style.cursor = "crosshair";
@@ -424,18 +445,22 @@ ipcRenderer.on("drawTick", () => {
     });
     c.on("click tap", (e) => {
       if (boardState.mode == "eraser") {
-        e.target.destroy();
+        boardState.after = [];
+        boardState.before.push(layer.children.slice(1, layer.children.length));
+        e.target.remove();
         stage.add(layer);
       }
     });
+    boardState.after = [];
+    boardState.before.push(layer.children.slice(1, layer.children.length));
     layer.add(c);
     stage.add(layer);
-    ;
   });
 });
 
 ipcRenderer.on("drawFreehand", () => {
-  masterBoard.attrs.fill = (boardState.bg.length < 8)? boardState.bg:"#00000001";
+  masterBoard.attrs.fill =
+    boardState.bg.length < 8 ? boardState.bg : "#00000001";
   layer.add(masterBoard);
   stage.add(layer);
   stage.container().style.cursor = "crosshair";
@@ -453,22 +478,26 @@ ipcRenderer.on("drawFreehand", () => {
     });
     c.on("click tap", (e) => {
       if (boardState.mode == "eraser") {
-        e.target.destroy();
+        boardState.after = [];
+        boardState.before.push(layer.children.slice(1, layer.children.length));
+        e.target.remove();
         stage.add(layer);
       }
     });
+    boardState.after = [];
+    boardState.before.push(layer.children.slice(1, layer.children.length));
     layer.add(c);
     stage.add(layer);
     anim.start();
   });
   stage.on("mouseup touchend", () => {
     anim.stop();
-    ;
   });
 });
 
 ipcRenderer.on("textMode", () => {
-  masterBoard.attrs.fill = (boardState.bg.length < 8)? boardState.bg:"#00000001";
+  masterBoard.attrs.fill =
+    boardState.bg.length < 8 ? boardState.bg : "#00000001";
   layer.add(masterBoard);
   stage.add(layer);
   stage.container().style.cursor = "text";
@@ -484,20 +513,24 @@ ipcRenderer.on("textMode", () => {
     });
     c.on("click tap", (e) => {
       if (boardState.mode == "eraser") {
-        e.target.destroy();
+        boardState.after = [];
+        boardState.before.push(layer.children.slice(1, layer.children.length));
+        e.target.remove();
         stage.add(layer);
       }
     });
+    boardState.after = [];
+    boardState.before.push(layer.children.slice(1, layer.children.length));
     layer.add(c);
     stage.add(layer);
-    ;
   });
 
   container.addEventListener("keydown", f1);
 });
 
 ipcRenderer.on("dragMode", () => {
-  masterBoard.attrs.fill = (boardState.bg.length < 8)? boardState.bg:"#00000001";
+  masterBoard.attrs.fill =
+    boardState.bg.length < 8 ? boardState.bg : "#00000001";
   layer.add(masterBoard);
   stage.add(layer);
   stage.container().style.cursor = "move";
@@ -509,7 +542,8 @@ ipcRenderer.on("dragMode", () => {
 
 ipcRenderer.on("eraserMode", () => {
   stage.container().style.cursor = "crosshair";
-  masterBoard.attrs.fill = (boardState.bg.length < 8)? boardState.bg:"#00000001";
+  masterBoard.attrs.fill =
+    boardState.bg.length < 8 ? boardState.bg : "#00000001";
   layer.add(masterBoard);
   stage.add(layer);
 });
@@ -520,7 +554,9 @@ ipcRenderer.on("resetBoard", () => {
   for (i = 1; i < layer.children.length; i++) {
     layer.children[i].draggable(false);
   }
-  stage.off("mouseup mousedown click touchstart touchend tap mousemove touchmove");
+  stage.off(
+    "mouseup mousedown click touchstart touchend tap mousemove touchmove"
+  );
   container.removeEventListener("keydown", f1);
   container.removeEventListener("keydown", f2);
   stage.on("click touchstart", () => {
@@ -531,30 +567,60 @@ ipcRenderer.on("resetBoard", () => {
     x = stage.getPointerPosition().x;
     y = stage.getPointerPosition().y;
   });
-  for (let i = 1; i < layer.children.length; i++) {
-    layer.children[i].on("click tap", (e) => {
-      if (boardState.mode == "eraser") {
-        e.target.destroy();
-        stage.add(layer);
-      }
-    });
-  }
   layer.add(masterBoard);
   stage.add(layer);
 });
 
 ipcRenderer.on("bgSelect", (e, arg) => {
-  boardState.bg = "#" + arg
+  boardState.bg = "#" + arg;
   masterBoard.attrs.fill = boardState.bg;
   layer.add(masterBoard);
   stage.add(layer);
-})
+});
 
 ipcRenderer.on("clearBoard", () => {
-  for (let i = 1; i < layer.children.length;) {
-    layer.children[1].remove()
+  boardState.after = [];
+  boardState.before.push(layer.children.slice(1, layer.children.length));
+  for (let i = 1; i < layer.children.length; ) {
+    layer.children[1].remove();
   }
-  stage.add(layer)
-})
+  stage.add(layer);
+});
 
-ipcRenderer.on("laserCursor", () => {document.getElementById("container").style.cursor = 'url("./assets/icons/laser-pointer.png") 2 2, pointer'})
+ipcRenderer.on("laserCursor", () => {
+  document.getElementById("container").style.cursor =
+    'url("./assets/icons/laser-pointer.png") 2 2, pointer';
+});
+
+function stepBackward() {
+  if (boardState.before.length > 0 && boardState.mode != "drag") {
+    boardState.after.push(layer.children.slice(1, layer.children.length));
+    layer.children = Konva.Collection.toCollection(
+      layer.children.slice(0, 1).concat(boardState.before.pop())
+    );
+    stage.add(layer);
+  }
+}
+
+function stepForward() {
+  if (boardState.after.length > 0 && boardState.mode != "drag") {
+    boardState.before.push(layer.children.slice(1, layer.children.length));
+    layer.children = Konva.Collection.toCollection(
+      layer.children.slice(0, 1).concat(boardState.after.pop())
+    );
+    stage.add(layer);
+  }
+}
+
+ipcRenderer.on("undo", stepBackward);
+ipcRenderer.on("redo", stepForward);
+document.addEventListener("keydown", (e) => {
+  if (e.ctrlKey == true) {
+    if (e.key == "z") {
+      stepBackward();
+    }
+    if (e.key == "y") {
+      stepForward();
+    }
+  }
+});

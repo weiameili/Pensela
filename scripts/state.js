@@ -4,7 +4,9 @@ let boardState = {
   col: "#b4deff",
   strokeCol: "#b4deff",
   mode: "mouse",
-  bg: "#00000000"
+  bg: "#00000000",
+  before: [],
+  after: []
 };
 
 ipcRenderer.on("setMode", (e, arg) => {
