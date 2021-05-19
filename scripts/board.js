@@ -275,6 +275,10 @@ ipcRenderer.on("drawPolygon", () => {
         stroke: boardState.strokeCol,
         strokeWidth: 5,
       });
+      c.on("finish", () => {
+        anim.stop()
+        inDraw = false
+      })
       c.on("click tap", (e) => {
         if (boardState.mode == "eraser") {
           boardState.after = [];
@@ -549,6 +553,9 @@ ipcRenderer.on("eraserMode", () => {
 });
 
 ipcRenderer.on("resetBoard", () => {
+  if (inDraw) {
+    layer.children[layer.children.length - 1].fire("finish")
+  }
   masterBoard.attrs.fill = boardState.bg;
   stage.container().style.cursor = "default";
   for (i = 1; i < layer.children.length; i++) {
