@@ -1,8 +1,8 @@
 const { app, BrowserWindow, ipcMain, screen } = require("electron");
 const os = require("os");
 const path = require("path");
-const fs = require("fs")
-const screenshot = require("screenshot-desktop")
+const fs = require("fs");
+const screenshot = require("screenshot-desktop");
 
 function createWindow() {
   const board = new BrowserWindow({
@@ -171,29 +171,50 @@ function createWindow() {
   });
 
   ipcMain.on("bgSelect", () => {
-    openBackgroundDialog()
-  })
-  ipcMain.on("bgUpdate", (e, arg) => controller.webContents.send("bgUpdate", arg))
+    openBackgroundDialog();
+  });
+  ipcMain.on("bgUpdate", (e, arg) =>
+    controller.webContents.send("bgUpdate", arg)
+  );
   ipcMain.on("bgSubmit", (e, arg) => {
-    board.webContents.send("bgSelect", arg)
-    board.focus()
-  })
+    board.webContents.send("bgSelect", arg);
+    board.focus();
+  });
 
-  ipcMain.on("clearBoard", () => board.webContents.send("clearBoard"))
+  ipcMain.on("clearBoard", () => board.webContents.send("clearBoard"));
 
-  ipcMain.on("laserCursor", () => board.webContents.send("laserCursor"))
+  ipcMain.on("laserCursor", () => board.webContents.send("laserCursor"));
 
-  ipcMain.on("undo", () => board.webContents.send("undo"))
-  ipcMain.on("redo", () => board.webContents.send("redo"))
+  ipcMain.on("undo", () => board.webContents.send("undo"));
+  ipcMain.on("redo", () => board.webContents.send("redo"));
 
   ipcMain.on("screenshot", () => {
-    let d = new Date()
-    if(!fs.existsSync(os.homedir() + "/Pictures/Pensela")) {
-      fs.mkdirSync(os.homedir() + "/Pictures/Pensela")
+    let d = new Date();
+    if (!fs.existsSync(os.homedir() + "/Pictures/Pensela")) {
+      fs.mkdirSync(os.homedir() + "/Pictures/Pensela");
     }
-    screenshot({filename: os.homedir() + "/Pictures/Pensela/Screenshot " + ("0" + d.getDate()).slice(-2) + "-" + ("0" + (d.getMonth() + 1)).slice(-2) + "-" + d.getFullYear() + " " + d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds() + ".png"})
-    board.webContents.send("screenshot")
-  })
+    screenshot({
+      filename:
+        os.homedir() +
+        "/Pictures/Pensela/Screenshot " +
+        ("0" + d.getDate()).slice(-2) +
+        "-" +
+        ("0" + (d.getMonth() + 1)).slice(-2) +
+        "-" +
+        d.getFullYear() +
+        " " +
+        d.getHours() +
+        ":" +
+        d.getMinutes() +
+        ":" +
+        d.getSeconds() +
+        ".png",
+    });
+    board.webContents.send("screenshot");
+  });
+
+  ipcMain.on("strokeIncrease", () => board.webContents.send("strokeIncrease"));
+  ipcMain.on("strokeDecrease", () => board.webContents.send("strokeDecrease"));
 
   if (os.platform() == "win32") {
     setTimeout(() => {

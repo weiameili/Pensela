@@ -17,6 +17,11 @@ body {
   flex-direction: column;
 }
 
+::selection {
+  background: none;
+  color: none;
+}
+
 .panel {
   -webkit-app-region: no-drag;
   margin: 0.5vh 0.5vw;

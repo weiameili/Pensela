@@ -101,7 +101,7 @@ ipcRenderer.on("drawSquare", () => {
       height: 0,
       fill: boardState.col,
       stroke: boardState.strokeCol,
-      strokeWidth: 5,
+      strokeWidth: boardState.strokeWidth,
     });
     c.on("click tap", (e) => {
       if (boardState.mode == "eraser") {
@@ -141,7 +141,7 @@ ipcRenderer.on("drawCircle", () => {
       radiusY: 0,
       fill: boardState.col,
       stroke: boardState.strokeCol,
-      strokeWidth: 5,
+      strokeWidth: boardState.strokeWidth,
     });
     c.on("click tap", (e) => {
       if (boardState.mode == "eraser") {
@@ -177,8 +177,8 @@ ipcRenderer.on("drawLine", () => {
     c = new Konva.Line({
       points: [x, y, x, y],
       stroke: boardState.strokeCol,
-      strokeWidth: 4,
-      hitStrokeWidth: 10,
+      strokeWidth: boardState.strokeWidth,
+      hitStrokeWidth: Math.max(10, boardState.strokeWidth),
     });
     c.on("click tap", (e) => {
       if (boardState.mode == "eraser") {
@@ -219,7 +219,7 @@ ipcRenderer.on("drawTriangle", () => {
       fill: boardState.col,
       closed: true,
       stroke: boardState.strokeCol,
-      strokeWidth: 5,
+      strokeWidth: boardState.strokeWidth,
     });
     c.on("click tap", (e) => {
       if (boardState.mode == "eraser") {
@@ -270,10 +270,9 @@ ipcRenderer.on("drawPolygon", () => {
         points: [x, y, x, y],
         fill: boardState.col,
         stroke: boardState.col,
-        strokeWidth: 4,
+        strokeWidth: boardState.strokeWidth,
         closed: true,
         stroke: boardState.strokeCol,
-        strokeWidth: 5,
       });
       c.on("finish", () => {
         anim.stop();
@@ -310,40 +309,38 @@ ipcRenderer.on("drawCross", () => {
   stage.container().style.cursor = "crosshair";
 
   stage.on("click tap", () => {
-    let l1 = 24,
-      l2 = 14,
-      l3 = 7;
+    let r = boardState.strokeWidth * 1.5;
     c = new Konva.Line({
       points: [
         x,
-        y - l2,
-        x + l1 - l3,
-        y - l1 - l3,
-        x + l1 + l3,
-        y - l1 + l3,
-        x + l2,
+        y + r,
+        x + r,
+        y + r * 2,
+        x + r * 2,
+        y + r,
+        x + r,
         y,
-        x + l1 + l3,
-        y + l1 - l3,
-        x + l1 - l3,
-        y + l1 + l3,
+        x + r * 2,
+        y - r,
+        x + r,
+        y - r * 2,
         x,
-        y + l2,
-        x - l1 + l3,
-        y + l1 + l3,
-        x - l1 - l3,
-        y + l1 - l3,
-        x - l2,
+        y - r,
+        x - r,
+        y - r * 2,
+        x - r * 2,
+        y - r,
+        x - r,
         y,
-        x - l1 - l3,
-        y - l1 + l3,
-        x - l1 + l3,
-        y - l1 - l3,
+        x - r * 2,
+        y + r,
+        x - r,
+        y + r * 2,
       ],
       fill: boardState.col,
       closed: true,
       stroke: boardState.strokeCol,
-      strokeWidth: 5,
+      strokeWidth: boardState.strokeWidth / 2,
     });
     c.on("click tap", (e) => {
       if (boardState.mode == "eraser") {
@@ -368,8 +365,8 @@ ipcRenderer.on("drawStar", () => {
   stage.container().style.cursor = "crosshair";
 
   stage.on("click tap", () => {
-    let r = 32,
-      r2 = 16,
+    let r = boardState.strokeWidth * 3,
+      r2 = r/2,
       sin = Math.sin,
       cos = Math.cos,
       pi = Math.PI;
@@ -399,7 +396,7 @@ ipcRenderer.on("drawStar", () => {
       fill: boardState.col,
       closed: true,
       stroke: boardState.strokeCol,
-      strokeWidth: 5,
+      strokeWidth: boardState.strokeWidth / 2,
     });
     c.on("click tap", (e) => {
       if (boardState.mode == "eraser") {
@@ -424,7 +421,7 @@ ipcRenderer.on("drawTick", () => {
   stage.container().style.cursor = "crosshair";
 
   stage.on("click tap", () => {
-    let l = 12;
+    let l = boardState.strokeWidth * 1.5;
     c = new Konva.Line({
       points: [
         x - l,
@@ -445,7 +442,7 @@ ipcRenderer.on("drawTick", () => {
       fill: boardState.col,
       closed: true,
       stroke: boardState.strokeCol,
-      strokeWidth: 5,
+      strokeWidth: boardState.strokeWidth / 2,
     });
     c.on("click tap", (e) => {
       if (boardState.mode == "eraser") {
@@ -476,7 +473,7 @@ ipcRenderer.on("drawFreehand", () => {
     c = new Konva.Line({
       points: [x, y],
       stroke: boardState.strokeCol,
-      strokeWidth: 10,
+      strokeWidth: boardState.strokeWidth,
       lineJoin: "round",
       lineCap: "round",
     });
@@ -633,11 +630,11 @@ document.addEventListener("keydown", (e) => {
 });
 
 ipcRenderer.on("screenshot", () => {
-  masterBoard.strokeWidth(10)
+  masterBoard.strokeWidth(10);
   layer.add(masterBoard);
   stage.add(layer);
   setTimeout(() => {
-    masterBoard.strokeWidth(0)
+    masterBoard.strokeWidth(0);
     layer.add(masterBoard);
     stage.add(layer);
   }, 100);
