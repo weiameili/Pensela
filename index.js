@@ -222,6 +222,8 @@ function createWindow() {
   ipcMain.on("arrowSingle", () => board.webContents.send("arrowSingle"))
   ipcMain.on("arrowDouble", () => board.webContents.send("arrowDouble"))
 
+  ipcMain.on("highlighter", () => board.webContents.send("highlighter"))
+
   if (os.platform() == "win32") {
     setTimeout(() => {
       board.minimize();

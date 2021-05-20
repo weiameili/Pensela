@@ -697,6 +697,43 @@ ipcRenderer.on("drawFreehand", () => {
   });
 });
 
+ipcRenderer.on("highlighter", () => {
+  masterBoard.attrs.fill =
+    boardState.bg.length < 8 ? boardState.bg : "#00000001";
+  layer.add(masterBoard);
+  stage.add(layer);
+  stage.container().style.cursor = "crosshair";
+
+  let anim = new Konva.Animation((f) => {
+    c.attrs.points = c.attrs.points.concat([x, y]);
+  }, layer);
+  stage.on("mousedown touchstart", () => {
+    c = new Konva.Line({
+      points: [x, y],
+      stroke: boardState.strokeCol + "66",
+      strokeWidth: boardState.strokeWidth * 2,
+      lineJoin: "round",
+      lineCap: "square",
+    });
+    c.on("click tap", (e) => {
+      if (boardState.mode == "eraser") {
+        boardState.after = [];
+        boardState.before.push(layer.children.slice(1, layer.children.length));
+        e.target.remove();
+        stage.add(layer);
+      }
+    });
+    boardState.after = [];
+    boardState.before.push(layer.children.slice(1, layer.children.length));
+    layer.add(c);
+    stage.add(layer);
+    anim.start();
+  });
+  stage.on("mouseup touchend", () => {
+    anim.stop();
+  });
+})
+
 ipcRenderer.on("textMode", () => {
   masterBoard.attrs.fill =
     boardState.bg.length < 8 ? boardState.bg : "#00000001";

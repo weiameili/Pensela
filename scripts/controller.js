@@ -159,3 +159,5 @@ $(".tool-item.stroke.decrease").on("click", () => ipcRenderer.send("strokeDecrea
 
 $(".tool-item.arrow.single").on("click", () => ipcRenderer.send("arrowSingle"))
 $(".tool-item.arrow.double").on("click", () => ipcRenderer.send("arrowDouble"))
+
+$(".tool-item.highlighter").on("click", () => ipcRenderer.send("highlighter"))
