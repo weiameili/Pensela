@@ -183,7 +183,10 @@ function createWindow() {
 
   ipcMain.on("clearBoard", () => board.webContents.send("clearBoard"));
 
-  ipcMain.on("laserCursor", () => board.webContents.send("laserCursor"));
+  ipcMain.on("laserCursor", () => {
+    board.webContents.send("setMode", "laser");
+    board.webContents.send("laserCursor");
+  });
 
   ipcMain.on("undo", () => board.webContents.send("undo"));
   ipcMain.on("redo", () => board.webContents.send("redo"));
@@ -215,6 +218,9 @@ function createWindow() {
 
   ipcMain.on("strokeIncrease", () => board.webContents.send("strokeIncrease"));
   ipcMain.on("strokeDecrease", () => board.webContents.send("strokeDecrease"));
+
+  ipcMain.on("arrowSingle", () => board.webContents.send("arrowSingle"))
+  ipcMain.on("arrowDouble", () => board.webContents.send("arrowDouble"))
 
   if (os.platform() == "win32") {
     setTimeout(() => {

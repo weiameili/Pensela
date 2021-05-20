@@ -156,3 +156,6 @@ $(".tool-item.screenshot").on("click", () => ipcRenderer.send("screenshot"))
 
 $(".tool-item.stroke.increase").on("click", () => ipcRenderer.send("strokeIncrease"))
 $(".tool-item.stroke.decrease").on("click", () => ipcRenderer.send("strokeDecrease"))
+
+$(".tool-item.arrow.single").on("click", () => ipcRenderer.send("arrowSingle"))
+$(".tool-item.arrow.double").on("click", () => ipcRenderer.send("arrowDouble"))

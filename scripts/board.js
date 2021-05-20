@@ -366,7 +366,7 @@ ipcRenderer.on("drawStar", () => {
 
   stage.on("click tap", () => {
     let r = boardState.strokeWidth * 3,
-      r2 = r/2,
+      r2 = r / 2,
       sin = Math.sin,
       cos = Math.cos,
       pi = Math.PI;
@@ -458,6 +458,207 @@ ipcRenderer.on("drawTick", () => {
     stage.add(layer);
   });
 });
+
+ipcRenderer.on("arrowSingle", () => {
+  masterBoard.attrs.fill =
+    boardState.bg.length < 8 ? boardState.bg : "#00000001";
+  layer.add(masterBoard);
+  stage.add(layer);
+  stage.container().style.cursor = "crosshair";
+
+  let l, r;
+
+  let A = {},
+    B = {},
+    C = {},
+    D = {},
+    E = {},
+    F = {},
+    G = {},
+    H = {},
+    I = {},
+    m = 0,
+    theta = 0;
+
+  let anim = new Konva.Animation((f) => {
+    H = { x: x, y: y };
+    if (Math.sqrt(Math.pow(H.x - I.x, 2) + Math.pow(H.y - I.y, 2)) > r * 3) {
+      theta = Math.atan2((H.y - I.y) * -1, H.x - I.x);
+      m = Math.sqrt(Math.pow(H.x - I.x, 2) + Math.pow(H.y - I.y, 2)) - r * 3;
+      E = { x: I.x + m * Math.cos(theta), y: I.y - m * Math.sin(theta) };
+      B = {
+        x: I.x + r * Math.cos(theta - Math.PI / 2),
+        y: I.y - r * Math.sin(theta - Math.PI / 2),
+      };
+      D = { x: E.x + B.x - I.x, y: E.y + B.y - I.y };
+      C = {
+        x: D.x + l * Math.cos(theta - Math.PI / 2),
+        y: D.y - l * Math.sin(theta - Math.PI / 2),
+      };
+      A = {
+        x: I.x + r * Math.cos(theta + Math.PI / 2),
+        y: I.y - r * Math.sin(theta + Math.PI / 2),
+      };
+      F = { x: E.x + A.x - I.x, y: E.y + A.y - I.y };
+      G = {
+        x: F.x + l * Math.cos(theta + Math.PI / 2),
+        y: F.y - l * Math.sin(theta + Math.PI / 2),
+      };
+
+      c.attrs.points = [
+        B.x,
+        B.y,
+        D.x,
+        D.y,
+        C.x,
+        C.y,
+        H.x,
+        H.y,
+        G.x,
+        G.y,
+        F.x,
+        F.y,
+        A.x,
+        A.y,
+      ];
+      layer.add(c);
+      stage.add(layer);
+    }
+  }, layer);
+  stage.on("mousedown touchstart", () => {
+    l = boardState.strokeWidth;
+    r = l / 2;
+    I = { x: x, y: y };
+    H = { x: x, y: y };
+    c = new Konva.Line({
+      points: [],
+      fill: boardState.strokeCol,
+      closed: true,
+      stroke: boardState.strokeCol,
+      strokeWidth: 0,
+    });
+    c.on("click tap", (e) => {
+      if (boardState.mode == "eraser") {
+        boardState.after = [];
+        boardState.before.push(layer.children.slice(1, layer.children.length));
+        e.target.remove();
+        stage.add(layer);
+      }
+    });
+    boardState.after = [];
+    boardState.before.push(layer.children.slice(1, layer.children.length));
+    layer.add(c);
+    stage.add(layer);
+    anim.start();
+  });
+  stage.on("mouseup touchend", () => {
+    anim.stop();
+  });
+})
+
+ipcRenderer.on("arrowDouble", () => {
+  masterBoard.attrs.fill =
+    boardState.bg.length < 8 ? boardState.bg : "#00000001";
+  layer.add(masterBoard);
+  stage.add(layer);
+  stage.container().style.cursor = "crosshair";
+
+  let r;
+
+  let A = {},
+    B = {},
+    C = {},
+    D = {},
+    E = {},
+    F = {},
+    G = {},
+    H = {},
+    I = {},
+    J = {},
+    K = {},
+    L = {};
+  (m = 0), (theta = 0);
+
+  let anim = new Konva.Animation((f) => {
+    F = { x: x, y: y };
+    if (Math.sqrt(Math.pow(F.x - A.x, 2) + Math.pow(F.y - A.y, 2)) > r * 6) {
+      theta = Math.atan2(A.y - F.y, F.x - A.x);
+      m = Math.sqrt(Math.pow(F.x - A.x, 2) + Math.pow(F.y - A.y, 2)) - r * 6;
+      K = {
+        x: A.x + r * 3 * Math.cos(theta),
+        y: A.y - r * 3 * Math.sin(theta),
+      };
+      C = {
+        x: K.x + r * Math.cos(theta - Math.PI / 2),
+        y: K.y - r * Math.sin(theta - Math.PI / 2),
+      };
+      B = {
+        x: K.x + r * 3 * Math.cos(theta - Math.PI / 2),
+        y: K.y - r * 3 * Math.sin(theta - Math.PI / 2),
+      };
+      I = {
+        x: K.x + r * Math.cos(theta + Math.PI / 2),
+        y: K.y - r * Math.sin(theta + Math.PI / 2),
+      };
+      J = {
+        x: K.x + r * 3 * Math.cos(theta + Math.PI / 2),
+        y: K.y - r * 3 * Math.sin(theta + Math.PI / 2),
+      };
+      L = {
+        x: A.x + (r * 3 + m) * Math.cos(theta),
+        y: A.y - (r * 3 + m) * Math.sin(theta),
+      };
+      D = {
+        x: L.x + r * Math.cos(theta - Math.PI / 2),
+        y: L.y - r * Math.sin(theta - Math.PI / 2),
+      };
+      E = {
+        x: L.x + r * 3 * Math.cos(theta - Math.PI / 2),
+        y: L.y - r * 3 * Math.sin(theta - Math.PI / 2),
+      };
+      H = {
+        x: L.x + r * Math.cos(theta + Math.PI / 2),
+        y: L.y - r * Math.sin(theta + Math.PI / 2),
+      };
+      G = {
+        x: L.x + r * 3 * Math.cos(theta + Math.PI / 2),
+        y: L.y - r * 3 * Math.sin(theta + Math.PI / 2),
+      };
+
+      c.attrs.points = [A.x, A.y, B.x, B.y, C.x, C.y, D.x, D.y, E.x, E.y, F.x, F.y, G.x, G.y, H.x, H.y, I.x, I.y, J.x, J.y];
+      layer.add(c);
+      stage.add(layer);
+    }
+  }, layer);
+  stage.on("mousedown touchstart", () => {
+    r = boardState.strokeWidth / 2;
+    A = { x: x, y: y };
+    F = { x: x, y: y };
+    c = new Konva.Line({
+      points: [],
+      fill: boardState.strokeCol,
+      closed: true,
+      stroke: boardState.strokeCol,
+      strokeWidth: 0,
+    });
+    c.on("click tap", (e) => {
+      if (boardState.mode == "eraser") {
+        boardState.after = [];
+        boardState.before.push(layer.children.slice(1, layer.children.length));
+        e.target.remove();
+        stage.add(layer);
+      }
+    });
+    boardState.after = [];
+    boardState.before.push(layer.children.slice(1, layer.children.length));
+    layer.add(c);
+    stage.add(layer);
+    anim.start();
+  });
+  stage.on("mouseup touchend", () => {
+    anim.stop();
+  });
+})
 
 ipcRenderer.on("drawFreehand", () => {
   masterBoard.attrs.fill =
