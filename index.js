@@ -21,8 +21,8 @@ function createWindow() {
   board.setResizable(false);
 
   const controller = new BrowserWindow({
-    width: 1375,
-    height: 120,
+    width: screen.getPrimaryDisplay().workAreaSize.width * 1350 / 1920,
+    height: screen.getPrimaryDisplay().workAreaSize.width * 1350 / 1920 * 5/54,
     webPreferences: {
       nodeIntegration: true,
       devTools: true,

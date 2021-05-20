@@ -26,10 +26,12 @@ body {
   -webkit-app-region: no-drag;
   margin: 0.5vh 0.5vw;
   padding: 0px 10px;
-  width: 97vw;
-  height: 97vh;
+  width: 97.5vw;
+  height: 95vh;
+  position: absolute;
+  top: 2.5vh;
   background-color: rgb(8, 13, 15);
-  border-radius: 30px;
+  border-radius: 2vw;
   box-shadow: 0px 0px 5px 2px rgb(29, 48, 59);
   display: flex;
   flex-direction: row;
@@ -63,7 +65,7 @@ body {
   margin: auto 12.5vh;
   height: 60vh;
   padding: 2vh;
-  border-radius: 10px;
+  border-radius: 1vw;
 }
 
 .tool-container.text , .tool-container.bg{
@@ -90,7 +92,7 @@ body {
   cursor: pointer;
   box-shadow: 0px 0px 0.75px 0.75px #80caff;
   transition: box-shadow 1s, color 2s, background-color 1s, background-image 1s;
-  border-radius: 10px;
+  border-radius: 0.75vw;
   background-position: center;
   background-repeat: no-repeat;
   background-size: 50% 50%;
@@ -121,7 +123,7 @@ body {
 }
 
 .tool-container.color {
-  width: 155vh;
+  width: 160vh;
   display: grid;
   grid-template-columns: auto auto auto auto auto;
   grid-template-rows: auto auto;
@@ -164,7 +166,7 @@ body {
 }
 
 .tool-container.shapes {
-  width: 125vh;
+  width: 130vh;
   display: grid;
   grid-template-columns: auto auto auto auto;
   grid-gap: 10px;
@@ -215,9 +217,9 @@ body {
 }
 
 .tool-container.win-controls {
-  width: 125vh;
+  width: 121vh;
   display: grid;
-  grid-template-columns: 25vh 25vh 25vh 25vh;
+  grid-template-columns: 24vh 24vh 24vh 24vh;
   grid-template-rows: 25vh 25vh;
   grid-gap: 10px;
 }
@@ -272,7 +274,7 @@ body {
 }
 
 .tool-container.sticker {
-  width: 195vh;
+  width: 200vh;
   display: grid;
   grid-template-columns: auto auto auto auto auto auto;
   grid-gap: 10px;
@@ -353,9 +355,9 @@ body {
 }
 
 .tool-container.alt-controls {
-  width: 90vh;
+  width: 87vh;
   display: grid;
-  grid-template-columns: 25vh 25vh 25vh;
+  grid-template-columns: 24vh 24vh 24vh;
   grid-template-rows: 25vh 25vh;
   grid-gap: 10px;
 }
