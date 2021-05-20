@@ -4,25 +4,28 @@
 
 ---
 
-# Pensela: A Screen Annotation Tool For Windows and Linux
+# Pensela: The Swiss Army Knife of Screen Annotation Tools
 
 
 ## Features
-- Multiple Shapes
+- Basic Shapes
     - Rectangle
     - Circle 
     - Triangle
     - Lines (Straight and Freehand)
     - Any Polygon
-- Pre added Stickers
+- Stickers: Pre Added Shapes
     - Star
     - Cross
     - Tick
+    - Single and Double Sided Arrows
+- Highlighter
+- Laser Pointer
+- Screenshot Tool     
 - Text Support
+- Backgound Pages
 - Custom Color Picker &nbsp;
-... 
-
----
+- And More ... 
 
 ## Installation
 **Packages can be Found in the [releases](https://github.com/weiameili/Pensela/releases) Section**
@@ -39,18 +42,16 @@ Download the Package and Install with the following command: `sudo pacman -U <pa
 ### Other Linux
 An AppImage File is Also available
 
----
-
-## Roadmap
+## Features to be Added in Future Versions
 - Support MacOS
 - Better UX
+- Auto Updates
+- Guided "Getting Started" Tour
 - Add more Features
-    - Background
-    - Selection
-    - Highliter 
-    - Clipboard Support
-
----
+    - Full-fledged Screen Recording Tool
+    - Better Text Support
+    - Seperate Colors For Stroke and Fill
+    - Better Laser Pointer
 
 ## Contributing
 Any kind of contribution is welcome
@@ -62,8 +63,6 @@ Any kind of contribution is welcome
 6. Open a Pull Request
 
 Feel free to report an issue or request a feature in the Issues Section.
-
----
 
 ## License
 Distributed under the ISC License.
