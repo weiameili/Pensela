@@ -33,8 +33,8 @@ $(".tool-item.secondary.transparent.color").on("click", (e) => {
   ipcRenderer.send("colSelectFill", e.target.getAttribute("colorData"));
 });
 
-$(".tool-item.color.custom").on("click", () => {
-  ipcRenderer.send("customColor");
+$(".tool-item.color.custom").on("click", (e) => {
+  ipcRenderer.send("customColor", e.clientX);
 });
 
 ipcRenderer.on("colSubmit", (e, arg) => {
@@ -133,8 +133,8 @@ $(".tool-item.minimize").on("click", () => {
   ipcRenderer.send("minimizeWin");
 });
 
-$(".tool-item.bg").on("click", () => {
-  ipcRenderer.send("bgSelect")
+$(".tool-item.bg").on("click", (e) => {
+  ipcRenderer.send("bgSelect", e.clientX)
 })
 ipcRenderer.on("bgUpdate", (e, arg) => {
   $(".tool-item.bg").css("background", arg )

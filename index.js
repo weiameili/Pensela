@@ -22,7 +22,9 @@ function createWindow() {
 
   const controller = new BrowserWindow({
     width: Math.floor(screen.getPrimaryDisplay().size.width * (1350 / 1920)),
-    height: Math.floor(screen.getPrimaryDisplay().size.width * 1350 / 1920 * 1/11),
+    height: Math.floor(
+      (((screen.getPrimaryDisplay().size.width * 1350) / 1920) * 1) / 11
+    ),
     webPreferences: {
       nodeIntegration: true,
       devTools: true,
@@ -38,10 +40,12 @@ function createWindow() {
   controller.loadFile("controller.html");
   controller.setResizable(false);
 
-  function openPicker() {
+  function openPicker(x, y) {
     const picker = new BrowserWindow({
       width: Math.floor(screen.getPrimaryDisplay().size.width / 6),
-      height: Math.floor(screen.getPrimaryDisplay().size.width / 6 * 19 / 16),
+      height: Math.floor(
+        ((screen.getPrimaryDisplay().size.width / 6) * 19) / 16
+      ),
       webPreferences: {
         nodeIntegration: true,
         devTools: true,
@@ -52,16 +56,18 @@ function createWindow() {
       parent: board,
       icon: "./assets/logo.png",
     });
-    picker.setPosition(500, 300);
+    picker.setPosition(x, y);
     picker.setAlwaysOnTop(true, "screen");
     picker.loadFile("picker.html");
     picker.setResizable(false);
   }
 
-  function openBackgroundDialog() {
+  function openBackgroundDialog(x, y) {
     const dialog = new BrowserWindow({
       width: Math.floor(screen.getPrimaryDisplay().size.width / 6),
-      height: Math.floor(screen.getPrimaryDisplay().size.width / 6 * 11 / 8),
+      height: Math.floor(
+        ((screen.getPrimaryDisplay().size.width / 6) * 11) / 8
+      ),
       webPreferences: {
         nodeIntegration: true,
         devTools: true,
@@ -72,7 +78,7 @@ function createWindow() {
       parent: board,
       icon: "./assets/logo.png",
     });
-    dialog.setPosition(500, 300);
+    dialog.setPosition(x, y);
     dialog.setAlwaysOnTop(true, "screen");
     dialog.loadFile("background.html");
     dialog.setResizable(false);
@@ -111,7 +117,14 @@ function createWindow() {
   ipcMain.on("colSelectFill", (e, arg) => {
     board.webContents.send("colSelectFill", arg);
   });
-  ipcMain.on("customColor", openPicker);
+  ipcMain.on("customColor", (e, arg) =>
+    openPicker(
+      controller.getPosition()[0] +
+        arg -
+        Math.floor(screen.getPrimaryDisplay().size.width / 12),
+      controller.getPosition()[1] + controller.getSize()[1] + 10
+    )
+  );
   ipcMain.on("colSubmit", (e, arg) => {
     controller.webContents.send("colSubmit", arg);
   });
@@ -170,9 +183,14 @@ function createWindow() {
     board.close();
   });
 
-  ipcMain.on("bgSelect", () => {
-    openBackgroundDialog();
-  });
+  ipcMain.on("bgSelect", (e, arg) =>
+    openBackgroundDialog(
+      controller.getPosition()[0] +
+        arg -
+        Math.floor(screen.getPrimaryDisplay().size.width / 12),
+      controller.getPosition()[1] + controller.getSize()[1] + 10
+    )
+  );
   ipcMain.on("bgUpdate", (e, arg) =>
     controller.webContents.send("bgUpdate", arg)
   );
@@ -219,10 +237,10 @@ function createWindow() {
   ipcMain.on("strokeIncrease", () => board.webContents.send("strokeIncrease"));
   ipcMain.on("strokeDecrease", () => board.webContents.send("strokeDecrease"));
 
-  ipcMain.on("arrowSingle", () => board.webContents.send("arrowSingle"))
-  ipcMain.on("arrowDouble", () => board.webContents.send("arrowDouble"))
+  ipcMain.on("arrowSingle", () => board.webContents.send("arrowSingle"));
+  ipcMain.on("arrowDouble", () => board.webContents.send("arrowDouble"));
 
-  ipcMain.on("highlighter", () => board.webContents.send("highlighter"))
+  ipcMain.on("highlighter", () => board.webContents.send("highlighter"));
 
   if (os.platform() == "win32") {
     setTimeout(() => {
