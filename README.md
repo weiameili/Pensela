@@ -27,6 +27,9 @@
 - Custom Color Picker &nbsp;
 - And More ... 
 
+## Screenshot
+![Screenshot](./assets/screenshot.png)
+
 ## Installation
 **Packages can be Found in the [releases](https://github.com/weiameili/Pensela/releases) Section**
 
