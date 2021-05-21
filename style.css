@@ -13,8 +13,12 @@
 body {
   margin: 0;
   padding: 0;
+  width: 100vw;
+  height: 100vh;
   display: flex;
   flex-direction: column;
+  overflow-y: hidden; 
+  overflow-x: hidden;
 }
 
 ::selection {
@@ -25,35 +29,25 @@ body {
 .panel {
   -webkit-app-region: no-drag;
   margin: 0.5vh 0.5vw;
-  padding: 0px 10px;
+  padding: 0px 8vh;
   width: 97.5vw;
   height: 95vh;
   position: absolute;
   top: 2.5vh;
   background-color: rgb(8, 13, 15);
   border-radius: 2vw;
-  box-shadow: 0px 0px 5px 2px rgb(29, 48, 59);
+  box-shadow: 0px 0px 4vmin 2vmin rgb(29, 48, 59);
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
 }
 
-.seperator {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: center;
-  height: 90%;
-  font-size: 40px;
-  color: rgb(111, 153, 151);
-}
-
 .logo {
   -webkit-app-region: drag;
-  height: 100%;
+  height: 80vh;
   width: 80vh;
   background-image: url("./assets/logo.png");
-  background-size: 75% 55%;
+  background-size: 70% 70%;
   background-position: center;
   background-repeat: no-repeat;
   cursor: pointer;
@@ -62,9 +56,9 @@ body {
 
 .tool-container {
   -webkit-app-region: no-drag;
-  margin: auto 12.5vh;
-  height: 60vh;
-  padding: 2vh;
+  margin: auto;
+  height: 56vh;
+  padding: 0vh;
   border-radius: 1vw;
 }
 
@@ -74,10 +68,10 @@ body {
   flex-direction: column;
   justify-content: center;
   text-align: center;
-  font-size: 40px;
+  font-size: 30vh;
   font-family: "Times New Roman", sans-serif;
   color: #b3fdd7;
-  margin: auto 17.5vh;
+  margin: auto;
   height: 50vh;
   width: 50vh;
 }
@@ -90,7 +84,7 @@ body {
 
 .tool-item {
   cursor: pointer;
-  box-shadow: 0px 0px 0.75px 0.75px #80caff;
+  box-shadow: 0px 0px 2vh 0.25vh #80caff;
   transition: box-shadow 1s, color 2s, background-color 1s, background-image 1s;
   border-radius: 0.75vw;
   background-position: center;
@@ -99,15 +93,15 @@ body {
 }
 
 .tool-item.selected {
-  box-shadow: 0px 0px 3px 3px #80caff;
+  box-shadow: 0px 0px 3vh 0.75vh #80caff;
 }
 
 .tool-item:not(.main):hover {
-  box-shadow: 0px 0px 2px 2px #80caff;
+  box-shadow: 0px 0px 4vh 0.75vh #80caff;
 }
 
 .tool-item.main:hover {
-  box-shadow: 0px 0px 3px 3px #80caff;
+  box-shadow: 0px 0px 4vh 1vh #80caff;
 }
 
 .tool-item.main {
@@ -123,11 +117,11 @@ body {
 }
 
 .tool-container.color {
-  width: 160vh;
+  width: 149vh;
   display: grid;
   grid-template-columns: auto auto auto auto auto;
   grid-template-rows: auto auto;
-  grid-gap: 10px;
+  grid-gap: 6vh;
 }
 
 .tool-item.color.main {
@@ -166,10 +160,10 @@ body {
 }
 
 .tool-container.shapes {
-  width: 130vh;
+  width: 118vh;
   display: grid;
   grid-template-columns: auto auto auto auto;
-  grid-gap: 10px;
+  grid-gap: 6vh;
 }
 
 .tool-item.shapes.selected {
@@ -217,11 +211,10 @@ body {
 }
 
 .tool-container.win-controls {
-  width: 121vh;
+  width: 118vh;
   display: grid;
-  grid-template-columns: 24vh 24vh 24vh 24vh;
-  grid-template-rows: 25vh 25vh;
-  grid-gap: 10px;
+  grid-template-columns: auto auto auto auto;
+  grid-gap: 6vh;
 }
 
 .tool-item.win-controls {
@@ -274,10 +267,10 @@ body {
 }
 
 .tool-container.sticker {
-  width: 200vh;
+  width: 180vh;
   display: grid;
   grid-template-columns: auto auto auto auto auto auto;
-  grid-gap: 10px;
+  grid-gap: 6vh;
 }
 
 .tool-item.sticker.selected {
@@ -357,9 +350,8 @@ body {
 .tool-container.alt-controls {
   width: 87vh;
   display: grid;
-  grid-template-columns: 24vh 24vh 24vh;
-  grid-template-rows: 25vh 25vh;
-  grid-gap: 10px;
+  grid-template-columns: 25vh 25vh 25vh;
+  grid-gap: 6vh;
 }
 
 .tool-item.alt-controls {
@@ -368,6 +360,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  font-size: 15vh;
   font-family: "Fredoka One", cursive;
 }
 

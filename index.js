@@ -21,8 +21,8 @@ function createWindow() {
   board.setResizable(false);
 
   const controller = new BrowserWindow({
-    width: screen.getPrimaryDisplay().workAreaSize.width * 1350 / 1920,
-    height: screen.getPrimaryDisplay().workAreaSize.width * 1350 / 1920 * 5/54,
+    width: Math.floor(screen.getPrimaryDisplay().size.width * (1350 / 1920)),
+    height: Math.floor(screen.getPrimaryDisplay().size.width * 1350 / 1920 * 1/11),
     webPreferences: {
       nodeIntegration: true,
       devTools: true,
@@ -40,8 +40,8 @@ function createWindow() {
 
   function openPicker() {
     const picker = new BrowserWindow({
-      width: 325,
-      height: 375,
+      width: Math.floor(screen.getPrimaryDisplay().size.width / 6),
+      height: Math.floor(screen.getPrimaryDisplay().size.width / 6 * 19 / 16),
       webPreferences: {
         nodeIntegration: true,
         devTools: true,
@@ -60,8 +60,8 @@ function createWindow() {
 
   function openBackgroundDialog() {
     const dialog = new BrowserWindow({
-      width: 325,
-      height: 450,
+      width: Math.floor(screen.getPrimaryDisplay().size.width / 6),
+      height: Math.floor(screen.getPrimaryDisplay().size.width / 6 * 11 / 8),
       webPreferences: {
         nodeIntegration: true,
         devTools: true,
