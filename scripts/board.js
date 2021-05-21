@@ -71,6 +71,14 @@ const f1 = (e) => {
       fill: c.attrs.fill,
     });
   }
+  c.on("click tap", (e) => {
+    if (boardState.mode == "eraser") {
+      boardState.after = [];
+      boardState.before.push(layer.children.slice(1, layer.children.length));
+      e.target.remove();
+      stage.add(layer);
+    }
+  });
   layer.add(c);
   stage.add(layer);
 };
