@@ -27,10 +27,11 @@
 - Custom Color Picker &nbsp;
 - And More ... 
 
-## Screenshot
-A Promo / Demo can be found [here](https://youtu.be/8_gk2b7JMW0)
+## Screenshots
 ![Screenshot](./assets/screenshot2.png)
 ![Screenshot](./assets/screenshot1.png)
+
+A Promo / Demo can be found [here](https://youtu.be/OzpgCw24ut8)
 
 ## Installation
 **Packages can be Found in the [releases](https://github.com/weiameili/Pensela/releases) Section**
