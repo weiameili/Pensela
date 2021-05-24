@@ -838,6 +838,10 @@ ipcRenderer.on("clearBoard", () => {
 });
 
 ipcRenderer.on("laserCursor", () => {
+  masterBoard.attrs.fill =
+    boardState.bg.length < 8 ? boardState.bg : "#00000001";
+  layer.add(masterBoard);
+  stage.add(layer);
   document.getElementById("container").style.cursor =
     'url("./assets/icons/laser-pointer.png") 2 2, pointer';
 });

@@ -225,9 +225,9 @@ function createWindow() {
         d.getFullYear() +
         " " +
         d.getHours() +
-        ":" +
+        "-" +
         d.getMinutes() +
-        ":" +
+        "-" +
         d.getSeconds() +
         ".png",
     });
