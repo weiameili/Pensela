@@ -1,0 +1,25 @@
+{
+  "appId": "com.wali.Pensela",
+  "productName": "Pensela",
+  "directories": {
+    "output": "build"
+  },
+  "win": {
+    "target": ["nsis", "zip"],
+    "icon": "./assets/logo.ico"
+  },
+  "nsis": {
+    "oneClick": false,
+    "perMachine": true,
+    "allowElevation": true,
+    "allowToChangeInstallationDirectory": true
+  },
+  "linux": {
+    "target": ["AppImage", "deb", "pacman", "tar.xz"],
+    "icon": "./assets/logo.icns"
+  },
+  "files": ["!README.md", "!assets/screenshot*.png", "!.vscode/${/*}"],
+  "publish": {
+      "provider": "github"
+  }
+}
