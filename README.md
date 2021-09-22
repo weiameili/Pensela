@@ -36,20 +36,17 @@ A Promo / Demo can be found [here](https://youtu.be/OzpgCw24ut8)
 ## Installation
 **Packages can be Found in the [releases](https://github.com/weiameili/Pensela/releases) Section**
 
-### Windows
-Download and run the exe installer
+**Note**: Imagemagick is required for screenshots on linux and screenshots are not guaranteed to work on wayland as of now.
 
-### Debian / Debian Based Linux Distributions
-Download the Deb Archive and Install with the following command: `sudo dpkg -i <path_to_package>.deb`
-
-### Arch Linux
-Install [pensela-bin](https://aur.archlinux.org/packages/pensela-bin/) from the AUR. Alternatively you can download the package archive from releases and install with the following command: `sudo pacman -U <path_to_package>.pacman`
-
-### Other Linux
-An AppImage File is Also available
+| OS | Instructions |
+| ------------- | ------------- |
+| Debian Based Linux  | A .deb archive has been provided  |
+| Arch Linux  | Arch user can install the [pensela-bin](https://aur.archlinux.org/packages/pensela-bin/) aur package or the prebuilt package archive provided in the releases section  |
+| Other Linux  | An AppImage has been provided  |
+| Windows  | Download and run the setup provided in the releases section. You will have to disable your antivirus and / or mark the setup as safe  |
+| Mac OS  | A dmg has been provided  |
 
 ## Features to be Added in Future Versions
-- Support MacOS
 - Better UX
 - Auto Updates
 - Guided "Getting Started" Tour
