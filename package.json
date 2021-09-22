@@ -6,7 +6,8 @@
   "scripts": {
     "start": "electron .",
     "build": "electron-builder build -wl --publish never --config ./electron-builder.json",
-    "deploy": "electron-builder build -wl --publish always --config ./electron-builder.json"
+    "deploy": "electron-builder build -wl --publish always --config ./electron-builder.json",
+    "_private:build:macos": "electron-builder build -m --publish never --config ./electron-builder.json"
   },
   "author": {
     "name": "Wali Waqar",
@@ -15,7 +16,8 @@
   "license": "ISC",
   "devDependencies": {
     "electron": "^11.2.3",
-    "electron-builder": "^22.10.5"
+    "electron-builder": "^22.11.7",
+    "electron-notarize": "^1.1.1"
   },
   "dependencies": {
     "jquery": "^3.6.0",

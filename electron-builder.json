@@ -18,6 +18,17 @@
     "target": ["AppImage", "deb", "pacman", "tar.xz"],
     "icon": "./assets/logo.icns"
   },
+  "mac": {
+    "target": [
+      "dmg"
+    ],
+    "icon": "./assets/logo.icns",
+    "hardenedRuntime": true,
+    "gatekeeperAssess": false,
+    "entitlements": "builder/entitlements.mac.plist",
+    "entitlementsInherit": "builder/entitlements.mac.plist",
+    "minimumSystemVersion": "10.14"
+  },
   "files": ["!README.md", "!assets/screenshot*.png", "!.vscode/${/*}"],
   "publish": {
       "provider": "github"
