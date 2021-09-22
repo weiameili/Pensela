@@ -43,7 +43,7 @@ Download and run the exe installer
 Download the Deb Archive and Install with the following command: `sudo dpkg -i <path_to_package>.deb`
 
 ### Arch Linux
-Download the Package and Install with the following command: `sudo pacman -U <path_to_package>.pacman`
+Install [pensela-bin](https://aur.archlinux.org/packages/pensela-bin/) from the AUR. Alternatively you can download the package archive from releases and install with the following command: `sudo pacman -U <path_to_package>.pacman`
 
 ### Other Linux
 An AppImage File is Also available
