@@ -1,0 +1,52 @@
+name: Bug Report
+description: File a bug report
+title: "[Bug]: "
+labels: ["bug"]
+assignees:
+  - weiameili
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this bug report!
+  
+  - type: textarea
+    id: bug-details
+    attributes:
+      label: What happened?
+      description: Also tell us, what did you expect to happen?
+      placeholder: Tell us what you see!
+      value: "Describe your bug here"
+    validations:
+      required: true
+  - type: textarea
+    id: expectations
+    attributes:
+      label:  What did you expect to happen?
+      description: Describe what you expected to happen.
+      placeholder: Describe what you expected to happen.
+      value: "I expected to see ..."
+  - type: dropdown
+    id: version
+    attributes:
+      label: Pensela's version
+      description: What version of Pensela are you running?
+      options:
+        - Compiled from source
+        - v1.2.3
+        - v1.1.3
+        - v1.1.2
+        - v1.1.1
+        - v1.1.0
+        - v1.0.0
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Code of Conduct
+      description: By submitting this issue, you agree to follow our [Code of Conduct](https://github.com/weiameili/Pensela/blob/master/CODE_OF_CONDUCT.md)
+      options:
+        - label: I agree to follow this project's Code of Conduct
+          required: true
