@@ -44,7 +44,7 @@ A Promo / Demo can be found [here](https://youtu.be/OzpgCw24ut8)
 | Arch Linux  | Arch user can install the [pensela-bin](https://aur.archlinux.org/packages/pensela-bin/) aur package or the prebuilt package archive provided in the releases section  |
 | Other Linux  | An AppImage has been provided  |
 | Windows  | Download and run the setup provided in the releases section. You will have to disable your antivirus and / or mark the setup as safe  |
-| Mac OS  | A dmg has been provided  |
+| Mac OS  | A dmg has been provided. Or use Homebrew: `brew install --cask pensela` |
 
 ## Features to be Added in Future Versions
 - Better UX
