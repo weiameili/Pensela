@@ -1,0 +1,69 @@
+name: Feature Request
+description: Suggest an idea you have in mind for this project
+title: "[Feature Request]: "
+labels: ["enhancement"]
+assignees:
+  - weiameili
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to suggest an idea for this project!
+
+  - type: textarea
+    id: problem-description
+    attributes:
+      label: What's the Problem?
+      description: If your feature request is related to a problem, describe it clearly.
+      placeholder: "Eg: I'm always frustrated when [...]"
+
+  - type: textarea
+    id: feature-idea
+    attributes:
+      label: What's your solution or idea?
+      description: "A clear and concise description of what you want to happen"
+      placeholder: "Eg: I would like Pensela to ..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: feature-alternatives
+    attributes:
+      label: Alternatives Considered
+      description: "Describe alternatives you've considered"
+      placeholder: "Eg: I have considered ... as an alternative to this issue"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: app-version
+    attributes:
+      label: App Version
+      description: "What version of Pensela are you running?"
+      options:
+        - Compiled from source
+        - v1.2.3
+        - v1.1.3
+        - v1.1.2
+        - v1.1.1
+        - v1.1.0
+        - v1.0.0
+    validations:
+      required: true
+
+  - type: input
+    id: os-version
+    attributes:
+      label: OS Version
+      description: "The version and build of the Operating System on which you are running this application"
+      placeholder: "Eg: Windows 10 2004 Build 19042 / MacOS Big Sur 11.2 / Ubuntu 20.04 LTS"
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional context
+      description: "Add any other comment or screenshots about the feature request here."
+      placeholder: "Any additional context or screenshots"
