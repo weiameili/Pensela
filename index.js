@@ -227,15 +227,15 @@ function createWindow() {
 
   ipcMain.on("screenshot", () => {
     let d = new Date();
-    if (!fs.existsSync(os.homedir() + "/Pictures/Pensela")) {
-      fs.mkdirSync(os.homedir() + "/Pictures/Pensela");
+    let screenshotPath = path.join(app.getPath("pictures"), "Pensela");
+    if (!fs.existsSync(screenshotPath)) {
+      fs.mkdirSync(screenshotPath, { recursive: true });
     }
     screenshot.listDisplays().then((displays) => {
       for (i in displays) {
         screenshot({ 
           screen: displays[i].id,
-          filename: os.homedir() +
-            "/Pictures/Pensela/Screenshot " +
+          filename: path.join(screenshotPath, "Screenshot ") +
             ("0" + d.getDate()).slice(-2) +
             "-" +
             ("0" + (d.getMonth() + 1)).slice(-2) +
