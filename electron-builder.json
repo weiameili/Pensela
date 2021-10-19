@@ -17,7 +17,13 @@
   "linux": {
     "target": ["AppImage", "deb", "pacman", "tar.xz"],
     "icon": "./assets/logo.icns"
-  },
+	},
+	"deb": {
+		"depends": ["imagemagick"]
+	},
+	"pacman": {
+		"depends": ["imagemagick"]
+	},
   "mac": {
     "target": [
       "dmg"
