@@ -1,66 +1,31 @@
-name: CI
+name: Build/release
 
 on: [push, pull_request]
 
 jobs:
-  build_windows_and_mac:
+    release:
+        runs-on: ${{ matrix.os }}
 
-    strategy:
-      matrix:
-        os: [windows-latest, macos-latest]
-        node-version: [14.x, 16.x]
+        strategy:
+            matrix:
+                os: [macos-latest, ubuntu-latest, windows-latest]
 
-    runs-on: ${{ matrix.os }}
+        steps:
+            - name: Check out Git repository
+              uses: actions/checkout@v1
 
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
+            - name: Install Node.js, NPM and Yarn
+              uses: actions/setup-node@v1
+              with:
+                  node-version: 10
 
-      - name: Set up Node.js environment
-        uses: actions/setup-node@v2
-        with:
-          node-version: ${{ matrix.node-version }}
+            - name: Build/release Electron app
+              uses: samuelmeuli/action-electron-builder@v1
+              with:
+                  # GitHub token, automatically provided to the action
+                  # (No need to define this secret in the repo settings)
+                  github_token: ${{ secrets.github_token }}
 
-      - name: Cache Dependencies
-        uses: actions/cache@v2
-        with:
-          path: ~/.npm
-          key: ${{ matrix.os }}-node-${{ matrix.node-version }}-${{ hashFiles('**/package-lock.json') }}
-
-      - name: Install Dependencies
-        run: npm install
-
-      - name: Build
-        run: npm run build:single
-
-  build_linux:
-
-    strategy:
-      matrix:
-        node-version: [14.x, 16.x]
-
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Set up Node.js environment
-        uses: actions/setup-node@v2
-        with:
-          node-version: ${{ matrix.node-version }}
-
-      - name: Cache Dependencies
-        uses: actions/cache@v2
-        with:
-          path: ~/.npm
-          key: ubuntu-latest-node-${{ matrix.node-version }}-${{ hashFiles('**/package-lock.json') }}
-
-      - name: Install Dependencies
-        run: npm install
-
-      - name: Install libarchive-tools
-        run: sudo apt-get install -y libarchive-tools
-
-      - name: Build
-        run: npm run build:single
+                  # If the commit is tagged with a version (e.g. "v1.0.0"),
+                  # release the app after building
+                  release: ${{ startsWith(github.ref, 'refs/tags/v') }}
