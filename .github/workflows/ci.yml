@@ -20,7 +20,7 @@ jobs:
                   node-version: 16
 
             - name: Install bsdtar when building for Linux
-              if: ${{ runner.os = 'Linux' }}
+              if: ${{ runner.os == 'Linux' }}
               run: sudo apt install libarchive-tools
 
             - name: Build/release Electron app
