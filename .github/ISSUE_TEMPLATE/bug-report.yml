@@ -33,6 +33,7 @@ body:
       description: What version of Pensela are you running?
       options:
         - Compiled from source
+        - v1.2.4
         - v1.2.3
         - v1.1.3
         - v1.1.2
