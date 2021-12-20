@@ -1,6 +1,6 @@
 {
 	"name": "pensela",
-	"version": "1.2.4",
+	"version": "1.2.5",
 	"description": "The Swiss Army Knife of Screen Annotation Tools",
 	"main": "index.js",
 	"scripts": {
