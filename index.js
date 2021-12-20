@@ -35,10 +35,6 @@ function createWindow() {
 	board.setResizable(false);
 
 	setTimeout(() => {
-		board.setPosition(
-			Math.min(...screen.getAllDisplays().map((j) => j.workArea.x)),
-			Math.min(...screen.getAllDisplays().map((j) => j.workArea.y))
-		);
 		board.setSize(
 			Math.max(
 				...screen
@@ -51,7 +47,11 @@ function createWindow() {
 					.map((j) => j.workArea.y + j.workArea.height)
 			) - Math.min(...screen.getAllDisplays().map((j) => j.workArea.y))
 		);
-	}, 100);
+		board.setPosition(
+			Math.min(...screen.getAllDisplays().map((j) => j.workArea.x)),
+			Math.min(...screen.getAllDisplays().map((j) => j.workArea.y))
+		);
+	}, 10);
 
 	const controller = new BrowserWindow({
 		width: Math.floor(

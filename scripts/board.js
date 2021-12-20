@@ -1,5 +1,5 @@
 const Konva = require("konva");
-
+console.log(window.innerWidth);
 const stage = new Konva.Stage({
 	container: "container",
 	width: window.innerWidth,
