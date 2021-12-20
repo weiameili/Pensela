@@ -6,6 +6,8 @@ const screenshot = require("screenshot-desktop");
 
 function createWindow() {
 	const board = new BrowserWindow({
+		x: Math.min(...screen.getAllDisplays().map((j) => j.workArea.x)),
+		y: Math.min(...screen.getAllDisplays().map((j) => j.workArea.y)),
 		width:
 			Math.max(
 				...screen
@@ -18,6 +20,7 @@ function createWindow() {
 					.getAllDisplays()
 					.map((j) => j.workArea.y + j.workArea.height)
 			) - Math.min(...screen.getAllDisplays().map((j) => j.workArea.y)),
+		enableLargerThanScreen: true,
 		webPreferences: {
 			nodeIntegration: true,
 			devTools: true,
@@ -36,7 +39,18 @@ function createWindow() {
 			Math.min(...screen.getAllDisplays().map((j) => j.workArea.x)),
 			Math.min(...screen.getAllDisplays().map((j) => j.workArea.y))
 		);
-		console.log("set");
+		board.setSize(
+			Math.max(
+				...screen
+					.getAllDisplays()
+					.map((j) => j.workArea.x + j.workArea.width)
+			) - Math.min(...screen.getAllDisplays().map((j) => j.workArea.x)),
+			Math.max(
+				...screen
+					.getAllDisplays()
+					.map((j) => j.workArea.y + j.workArea.height)
+			) - Math.min(...screen.getAllDisplays().map((j) => j.workArea.y))
+		);
 	}, 100);
 
 	const controller = new BrowserWindow({
