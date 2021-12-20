@@ -1,186 +1,203 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Color Picker</title>
-    <style>
-      :root {
-        margin: 0px;
-        padding: 0px;
-        --hue: 0;
-        --sat: 100%;
-        --lightness: 50%;
-      }
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Color Picker</title>
+		<style>
+			:root {
+				margin: 0px;
+				padding: 0px;
+				--hue: 0;
+				--sat: 100%;
+				--lightness: 50%;
+			}
 
-      body {
-        margin: 0px;
-        width: 100vw;
-        height: 100vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-evenly;
-      }
+			body {
+				margin: 0px;
+				width: 100vw;
+				height: 100vh;
+				display: flex;
+				flex-direction: column;
+				justify-content: space-evenly;
+			}
 
-      #main-container {
-        display: flex;
-        width: 100vw;
-        height: 75vh;
-        justify-content: space-evenly;
-        flex-direction: row;
-      }
+			#main-container {
+				display: flex;
+				width: 100vw;
+				height: 75vh;
+				justify-content: space-evenly;
+				flex-direction: row;
+			}
 
-      .pallete {
-        margin: 2.5vh auto;
-        height: 75vmin;
-        width: 75vmin;
-        background: linear-gradient(0deg, rgb(0, 0, 0), transparent),
-          linear-gradient(90deg, rgb(255, 255, 255), transparent),
-          hsl(var(--hue), 100%, 50%);
-        border-radius: 5px;
-        transition: all 1s;
-        box-shadow: 0px 0px 3px 3px #000;
-      }
+			.pallete {
+				margin: 2.5vh auto;
+				height: 75vmin;
+				width: 75vmin;
+				background: linear-gradient(0deg, rgb(0, 0, 0), transparent),
+					linear-gradient(90deg, rgb(255, 255, 255), transparent),
+					hsl(var(--hue), 100%, 50%);
+				border-radius: 5px;
+				transition: all 1s;
+				box-shadow: 0px 0px 3px 3px #000;
+			}
 
-      .bar {
-        transition: all 1s;
-        margin: 2.5vh auto;
-        width: 10vh;
-        height: 75vmin;
-        border-radius: 5px;
-        box-shadow: 0px 0px 3px 3px #000;
-        background: linear-gradient(
-          180deg,
-          #f00,
-          #ff0,
-          #0f0,
-          #0ff,
-          #00f,
-          #f0f,
-          #f00
-        );
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-      }
+			.bar {
+				transition: all 1s;
+				margin: 2.5vh auto;
+				width: 10vh;
+				height: 75vmin;
+				border-radius: 5px;
+				box-shadow: 0px 0px 3px 3px #000;
+				background: linear-gradient(
+					180deg,
+					#f00,
+					#ff0,
+					#0f0,
+					#0ff,
+					#00f,
+					#f0f,
+					#f00
+				);
+				display: flex;
+				flex-direction: row;
+				justify-content: center;
+			}
 
-      #color-preview {
-        height: 20vh;
-        width: 95vw;
-        margin: 1.5vh 2.5vw;
-        border-radius: 5px;
-        box-shadow: 0px 0px 3px 3px #000;
-        background: hsl(var(--hue), var(--sat), var(--lightness));
-      }
+			#color-preview {
+				height: 20vh;
+				width: 95vw;
+				margin: 1.5vh 2.5vw;
+				border-radius: 5px;
+				box-shadow: 0px 0px 3px 3px #000;
+				background: hsl(var(--hue), var(--sat), var(--lightness));
+			}
 
-      #button-container {
-        height: 20vh;
-        width: 100vw;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-evenly;
-      }
+			#button-container {
+				height: 20vh;
+				width: 100vw;
+				display: flex;
+				flex-direction: row;
+				justify-content: space-evenly;
+			}
 
-      .button {
-        width: 45vw;
-        height: 10vh;
-        margin: 1.5vh auto;
-        border-radius: 5px;
-        box-shadow: 0px 0px 3px 3px #000;
-        transition: all 1s;
-        color: #fff;
-        display: flex;
-        flex-direction: column;
-        text-align: center;
-        justify-content: center;
-        font-size: 25px;
-      }
+			.button {
+				width: 45vw;
+				height: 10vh;
+				margin: 1.5vh auto;
+				border-radius: 5px;
+				box-shadow: 0px 0px 3px 3px #000;
+				transition: all 1s;
+				color: #fff;
+				display: flex;
+				flex-direction: column;
+				text-align: center;
+				justify-content: center;
+				font-size: 25px;
+			}
 
-      .button:hover,
-      .bar:hover,
-      .pallete:hover {
-        box-shadow: 0px 0px 5px 5px rgb(0, 0, 0);
-        cursor: pointer;
-      }
+			.button:hover,
+			.bar:hover,
+			.pallete:hover {
+				box-shadow: 0px 0px 5px 5px rgb(0, 0, 0);
+				cursor: pointer;
+			}
 
-      .button.no {
-        background-color: rgb(255, 85, 85);
-      }
+			.button.no {
+				background-color: rgb(255, 85, 85);
+			}
 
-      .button.yes {
-        background-color: rgb(52, 214, 106);
-      }
+			.button.yes {
+				background-color: rgb(52, 214, 106);
+			}
 
-      #sat-marker {
-        background: #000;
-        width: 10vmin;
-        height: 1vh;
-        border-radius: 4px;
-        position: fixed;
-        top: 10px;
-      }
+			#sat-marker {
+				background: #000;
+				width: 10vmin;
+				height: 1vh;
+				border-radius: 4px;
+				position: fixed;
+				top: 10px;
+			}
 
-      .picker {
-        position: fixed;
-        top: 0px;
-        left: calc(70px + 69vmin);
-        color: hsl(
-          var(--hue),
-          calc(100% - var(--sat)),
-          calc(100% - var(--lightness))
-        );
-        font-size: 30px;
-      }
-    </style>
-  </head>
-  <body>
-    <div id="main-container">
-      <div class="bar">
-        <div id="sat-marker"></div>
-      </div>
-      <div class="pallete">
-        <div class="picker">○</div>
-      </div>
-    </div>
-    <div id="color-preview"></div>
-    <div id="button-container">
-      <div class="button yes">✔</div>
-      <div class="button no">✘</div>
-    </div>
-  </body>
-  <script>
-    const { ipcRenderer } = require("electron")
-    const jQuery = require("jquery");
-    const $ = jQuery;
-    $(".bar").on("click", (e) => {
-      $(":root").css(
-        "--hue",
-        String((Math.max(0, Math.min(243.75, e.clientY - 9)) * 360) / 243.75)
-      );
-      $("#sat-marker ").css("top", String(e.clientY) + "px");
-    });
+			.picker {
+				position: fixed;
+				top: 0px;
+				left: calc(70px + 69vmin);
+				color: hsl(
+					var(--hue),
+					calc(100% - var(--sat)),
+					calc(100% - var(--lightness))
+				);
+				font-size: 30px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="main-container">
+			<div class="bar">
+				<div id="sat-marker"></div>
+			</div>
+			<div class="pallete">
+				<div class="picker">○</div>
+			</div>
+		</div>
+		<div id="color-preview"></div>
+		<div id="button-container">
+			<div class="button yes">✔</div>
+			<div class="button no">✘</div>
+		</div>
+	</body>
+	<script>
+		const { ipcRenderer } = require("electron");
+		const jQuery = require("jquery");
+		const $ = jQuery;
+		$(".bar").on("click", (e) => {
+			$(":root").css(
+				"--hue",
+				String(
+					(Math.max(0, Math.min(243.75, e.clientY - 9)) * 360) /
+						243.75
+				)
+			);
+			$("#sat-marker ").css("top", String(e.clientY) + "px");
+		});
 
-    $(".pallete").on("click", (e) => {
-      let s = Math.max(0, Math.min(243.75, e.clientX - 70)) / 243.75;
-      let v = (243.75 - Math.min(243.75, e.clientY - 10)) / 243.75;
-      let l = v - (v * s) / 2;
-      $(".picker").css("top", String(e.clientY - 20) + "px");
-      $(".picker").css("left", String(e.clientX - 10) + "px");
-      $(":root").css(
-        "--sat",
-        String(l % 1 == 0 ? 0 : ((v - l) / Math.min(l, 1 - l)) * 100) + "%"
-      );
-      $(":root").css("--lightness", String(l * 100) + "%");
-    });
+		$(".pallete").on("click", (e) => {
+			let s = Math.max(0, Math.min(243.75, e.clientX - 70)) / 243.75;
+			let v = (243.75 - Math.min(243.75, e.clientY - 10)) / 243.75;
+			let l = v - (v * s) / 2;
+			$(".picker").css("top", String(e.clientY - 20) + "px");
+			$(".picker").css("left", String(e.clientX - 10) + "px");
+			$(":root").css(
+				"--sat",
+				String(l % 1 == 0 ? 0 : ((v - l) / Math.min(l, 1 - l)) * 100) +
+					"%"
+			);
+			$(":root").css("--lightness", String(l * 100) + "%");
+		});
 
-    $(".button.no").on("click", () => {window.close()})
+		$(".button.no").on("click", () => {
+			window.close();
+		});
 
-    $(".button.yes").on("click", () => {
-      let col = $("#color-preview").css("background-color").replace("rgb(", "").replace(")", "").replace(" ", "").split(",").map(i => (parseInt(i).toString(16).length > 1)? parseInt(i).toString(16):"0"+parseInt(i).toString(16) ).join("")
-      ipcRenderer.send('colSelect', col)
-      ipcRenderer.send('colSubmit', col)
-      window.close()
-    })
-  </script>
+		$(".button.yes").on("click", () => {
+			let col = $("#color-preview")
+				.css("background-color")
+				.replace("rgb(", "")
+				.replace(")", "")
+				.replace(" ", "")
+				.split(",")
+				.map((i) =>
+					parseInt(i).toString(16).length > 1
+						? parseInt(i).toString(16)
+						: "0" + parseInt(i).toString(16)
+				)
+				.join("");
+			ipcRenderer.send("colSelect", col);
+			ipcRenderer.send("colSubmit", col);
+			window.close();
+		});
+	</script>
 </html>

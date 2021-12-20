@@ -1,373 +1,375 @@
 @import url("https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap");
 
 :root {
-  margin: 0;
-  padding: 0;
-  --colSelect: #b4deff;
-  --col1: #ffb4bd;
-  --col2: #b3fdd7;
-  --col3: #fff2b9;
-  --col4: #000;
+	margin: 0;
+	padding: 0;
+	--colSelect: #b4deff;
+	--col1: #ffb4bd;
+	--col2: #b3fdd7;
+	--col3: #fff2b9;
+	--col4: #000;
 }
 
 body {
-  margin: 0;
-  padding: 0;
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  overflow-y: hidden; 
-  overflow-x: hidden;
+	margin: 0;
+	padding: 0;
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	overflow-y: hidden;
+	overflow-x: hidden;
 }
 
 ::selection {
-  background: none;
-  color: none;
+	background: none;
+	color: none;
 }
 
 .panel {
-  -webkit-app-region: no-drag;
-  margin: 0.5vh 0.5vw;
-  padding: 0px 8vh;
-  width: 97.5vw;
-  height: 95vh;
-  position: absolute;
-  top: 2.5vh;
-  background-color: rgb(8, 13, 15);
-  border-radius: 2vw;
-  box-shadow: 0px 0px 4vmin 2vmin rgb(29, 48, 59);
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
+	-webkit-app-region: no-drag;
+	margin: 0.5vh 0.5vw;
+	padding: 0px 8vh;
+	width: 97.5vw;
+	height: 95vh;
+	position: absolute;
+	top: 2.5vh;
+	background-color: rgb(8, 13, 15);
+	border-radius: 2vw;
+	box-shadow: 0px 0px 4vmin 2vmin rgb(29, 48, 59);
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
 }
 
 .logo {
-  -webkit-app-region: drag;
-  height: 80vh;
-  width: 80vh;
-  background-image: url("./assets/logo.png");
-  background-size: 70% 70%;
-  background-position: center;
-  background-repeat: no-repeat;
-  cursor: pointer;
-  margin: auto 2vmin;
+	-webkit-app-region: drag;
+	height: 80vh;
+	width: 80vh;
+	background-image: url("./assets/logo.png");
+	background-size: 70% 70%;
+	background-position: center;
+	background-repeat: no-repeat;
+	cursor: pointer;
+	margin: auto 2vmin;
 }
 
 .tool-container {
-  -webkit-app-region: no-drag;
-  margin: auto;
-  height: 56vh;
-  padding: 0vh;
-  border-radius: 1vw;
+	-webkit-app-region: no-drag;
+	margin: auto;
+	height: 56vh;
+	padding: 0vh;
+	border-radius: 1vw;
 }
 
-.tool-container.text , .tool-container.bg{
-  -webkit-app-region: no-drag;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: center;
-  font-size: 30vh;
-  font-family: "Times New Roman", sans-serif;
-  color: #b3fdd7;
-  margin: auto;
-  height: 50vh;
-  width: 50vh;
+.tool-container.text,
+.tool-container.bg {
+	-webkit-app-region: no-drag;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	text-align: center;
+	font-size: 30vh;
+	font-family: "Times New Roman", sans-serif;
+	color: #b3fdd7;
+	margin: auto;
+	height: 50vh;
+	width: 50vh;
 }
 
 .tool-container.bg {
-  background-image: url("./assets/icons/transparent.png");
-  background-size: 300% 300%;
-  background-position: center;
+	background-image: url("./assets/icons/transparent.png");
+	background-size: 300% 300%;
+	background-position: center;
 }
 
 .tool-item {
-  cursor: pointer;
-  box-shadow: 0px 0px 2vh 0.25vh #80caff;
-  transition: box-shadow 1s, color 2s, background-color 1s, background-image 1s;
-  border-radius: 0.75vw;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: 50% 50%;
+	cursor: pointer;
+	box-shadow: 0px 0px 2vh 0.25vh #80caff;
+	transition: box-shadow 1s, color 2s, background-color 1s,
+		background-image 1s;
+	border-radius: 0.75vw;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 50% 50%;
 }
 
 .tool-item.selected {
-  box-shadow: 0px 0px 3vh 0.75vh #80caff;
+	box-shadow: 0px 0px 3vh 0.75vh #80caff;
 }
 
 .tool-item:not(.main):hover {
-  box-shadow: 0px 0px 4vh 0.75vh #80caff;
+	box-shadow: 0px 0px 4vh 0.75vh #80caff;
 }
 
 .tool-item.main:hover {
-  box-shadow: 0px 0px 4vh 1vh #80caff;
+	box-shadow: 0px 0px 4vh 1vh #80caff;
 }
 
 .tool-item.main {
-  grid-column-start: 1;
-  grid-column-end: 3;
-  grid-row-start: 1;
-  grid-row-end: 3;
+	grid-column-start: 1;
+	grid-column-end: 3;
+	grid-row-start: 1;
+	grid-row-end: 3;
 }
 
 .tool-item.text.selected {
-  background-color: #b3fdd7;
-  color:rgb(8, 13, 15);
+	background-color: #b3fdd7;
+	color: rgb(8, 13, 15);
 }
 
 .tool-container.color {
-  width: 149vh;
-  display: grid;
-  grid-template-columns: auto auto auto auto auto;
-  grid-template-rows: auto auto;
-  grid-gap: 6vh;
+	width: 149vh;
+	display: grid;
+	grid-template-columns: auto auto auto auto auto;
+	grid-template-rows: auto auto;
+	grid-gap: 6vh;
 }
 
 .tool-item.color.main {
-  background-color: var(--colSelect);
+	background-color: var(--colSelect);
 }
 
 .tool-item.color.main {
-  cursor: default;
-  box-shadow: 0px 0px 0.75px 0.75px #80caff;
+	cursor: default;
+	box-shadow: 0px 0px 0.75px 0.75px #80caff;
 }
 
 .tool-item.color.one {
-  background-color: var(--col1);
+	background-color: var(--col1);
 }
 
 .tool-item.color.two {
-  background-color: var(--col2);
+	background-color: var(--col2);
 }
 
 .tool-item.color.three {
-  background-color: var(--col3);
+	background-color: var(--col3);
 }
 
 .tool-item.color.four {
-  background-color: var(--col4);
+	background-color: var(--col4);
 }
 
 .tool-item.color.transparent {
-  background-image: url("./assets/icons/transparent.png");
-  background-size: 900% 900%;
+	background-image: url("./assets/icons/transparent.png");
+	background-size: 900% 900%;
 }
 
 .tool-item.color.custom {
-  background-image: url("./assets/icons/multicolor.png");
-  background-size: 100% 100%;
+	background-image: url("./assets/icons/multicolor.png");
+	background-size: 100% 100%;
 }
 
 .tool-container.shapes {
-  width: 118vh;
-  display: grid;
-  grid-template-columns: auto auto auto auto;
-  grid-gap: 6vh;
+	width: 118vh;
+	display: grid;
+	grid-template-columns: auto auto auto auto;
+	grid-gap: 6vh;
 }
 
 .tool-item.shapes.selected {
-  background-color: #fff2b9;
+	background-color: #fff2b9;
 }
 
 .tool-item.shapes.polygon {
-  background-image: url("./assets/icons/polygon.png");
+	background-image: url("./assets/icons/polygon.png");
 }
 
 .tool-item.shapes.circle {
-  background-image: url("./assets/icons/circle.png");
+	background-image: url("./assets/icons/circle.png");
 }
 
 .tool-item.shapes.line {
-  background-image: url("./assets/icons/line.png");
+	background-image: url("./assets/icons/line.png");
 }
 
 .tool-item.shapes.square {
-  background-image: url("./assets/icons/square.png");
+	background-image: url("./assets/icons/square.png");
 }
 
 .tool-item.shapes.triangle {
-  background-image: url("./assets/icons/triangle.png");
+	background-image: url("./assets/icons/triangle.png");
 }
 
 .tool-item.shapes.polygon.selected {
-  background-image: url("./assets/icons/dark/polygon.png");
+	background-image: url("./assets/icons/dark/polygon.png");
 }
 
 .tool-item.shapes.circle.selected {
-  background-image: url("./assets/icons/dark/circle.png");
+	background-image: url("./assets/icons/dark/circle.png");
 }
 
 .tool-item.shapes.line.selected {
-  background-image: url("./assets/icons/dark/line.png");
+	background-image: url("./assets/icons/dark/line.png");
 }
 
 .tool-item.shapes.square.selected {
-  background-image: url("./assets/icons/dark/square.png");
+	background-image: url("./assets/icons/dark/square.png");
 }
 
 .tool-item.shapes.triangle.selected {
-  background-image: url("./assets/icons/dark/triangle.png");
+	background-image: url("./assets/icons/dark/triangle.png");
 }
 
 .tool-container.win-controls {
-  width: 118vh;
-  display: grid;
-  grid-template-columns: auto auto auto auto;
-  grid-gap: 6vh;
+	width: 118vh;
+	display: grid;
+	grid-template-columns: auto auto auto auto;
+	grid-gap: 6vh;
 }
 
 .tool-item.win-controls {
-  color: #b3fdd7;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  font-family: "Fredoka One", cursive;
+	color: #b3fdd7;
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	font-family: "Fredoka One", cursive;
 }
 
 .tool-item.win-controls.selected {
-  background-color: #93ebb0;
+	background-color: #93ebb0;
 }
 
 .tool-item.tool-item.win-controls.visible {
-  background-image: url("./assets/icons/visible.png");
+	background-image: url("./assets/icons/visible.png");
 }
 
 .tool-item.tool-item.win-controls.invisible {
-  background-image: url("./assets/icons/invisible.png");
+	background-image: url("./assets/icons/invisible.png");
 }
 
 .tool-item.tool-item.win-controls.mouse {
-  background-image: url("./assets/icons/pointer.png");
+	background-image: url("./assets/icons/pointer.png");
 }
 
 .tool-item.win-controls.drag {
-  background-image: url("./assets/icons/move.png");
+	background-image: url("./assets/icons/move.png");
 }
 
 .tool-item.win-controls.screenshot {
-  background-image: url("./assets/icons/screenshot.png");
+	background-image: url("./assets/icons/screenshot.png");
 }
 
 .tool-item.win-controls.laser {
-  background-image: url("./assets/icons/laser.png");
+	background-image: url("./assets/icons/laser.png");
 }
 
 .tool-item.win-controls.mouse.selected {
-  background-image: url("./assets/icons/dark/pointer.png");
+	background-image: url("./assets/icons/dark/pointer.png");
 }
 
 .tool-item.win-controls.drag.selected {
-  background-image: url("./assets/icons/dark/move.png");
+	background-image: url("./assets/icons/dark/move.png");
 }
 
 .tool-item.win-controls.laser.selected {
-  background-image: url("./assets/icons/dark/laser.png");
+	background-image: url("./assets/icons/dark/laser.png");
 }
 
 .tool-container.sticker {
-  width: 180vh;
-  display: grid;
-  grid-template-columns: auto auto auto auto auto auto;
-  grid-gap: 6vh;
+	width: 180vh;
+	display: grid;
+	grid-template-columns: auto auto auto auto auto auto;
+	grid-gap: 6vh;
 }
 
 .tool-item.sticker.selected {
-  background-color: #ffb4bd;
+	background-color: #ffb4bd;
 }
 
 .tool-item.sticker.tick {
-  background-image: url("./assets/icons/tick.png");
+	background-image: url("./assets/icons/tick.png");
 }
 
 .tool-item.sticker.cross {
-  background-image: url("./assets/icons/cross.png");
+	background-image: url("./assets/icons/cross.png");
 }
 
 .tool-item.sticker.star {
-  background-image: url("./assets/icons/star.png");
+	background-image: url("./assets/icons/star.png");
 }
 
 .tool-item.sticker.pen {
-  background-image: url("./assets/icons/stroke.png");
+	background-image: url("./assets/icons/stroke.png");
 }
 
 .tool-item.sticker.eraser {
-  background-image: url("./assets/icons/eraser.png");
+	background-image: url("./assets/icons/eraser.png");
 }
 
 .tool-item.sticker.clear {
-  background-image: url("./assets/icons/clear.png");
+	background-image: url("./assets/icons/clear.png");
 }
 
 .tool-item.sticker.highlighter {
-  background-image: url("./assets/icons/highlighter.png");
+	background-image: url("./assets/icons/highlighter.png");
 }
 
 .tool-item.sticker.arrow.single {
-  background-image: url("./assets/icons/arrow.png");
+	background-image: url("./assets/icons/arrow.png");
 }
 
 .tool-item.sticker.arrow.double {
-  background-image: url("./assets/icons/arrow-double.png");
-  background-size: 55% 35%;
+	background-image: url("./assets/icons/arrow-double.png");
+	background-size: 55% 35%;
 }
 
 .tool-item.sticker.highlighter.selected {
-  background-image: url("./assets/icons/dark/highlighter.png");
+	background-image: url("./assets/icons/dark/highlighter.png");
 }
 
 .tool-item.sticker.arrow.single.selected {
-  background-image: url("./assets/icons/dark/arrow.png");
+	background-image: url("./assets/icons/dark/arrow.png");
 }
 
 .tool-item.sticker.arrow.double.selected {
-  background-image: url("./assets/icons/dark/arrow-double.png");
-  background-size: 55% 35%;
+	background-image: url("./assets/icons/dark/arrow-double.png");
+	background-size: 55% 35%;
 }
 
 .tool-item.sticker.tick.selected {
-  background-image: url("./assets/icons/dark/tick.png");
+	background-image: url("./assets/icons/dark/tick.png");
 }
 
 .tool-item.sticker.cross.selected {
-  background-image: url("./assets/icons/dark/cross.png");
+	background-image: url("./assets/icons/dark/cross.png");
 }
 
 .tool-item.sticker.star.selected {
-  background-image: url("./assets/icons/dark/star.png");
+	background-image: url("./assets/icons/dark/star.png");
 }
 
 .tool-item.sticker.pen.selected {
-  background-image: url("./assets/icons/dark/stroke.png");
+	background-image: url("./assets/icons/dark/stroke.png");
 }
 
 .tool-item.sticker.eraser.selected {
-  background-image: url("./assets/icons/dark/eraser.png");
+	background-image: url("./assets/icons/dark/eraser.png");
 }
 
 .tool-container.alt-controls {
-  width: 87vh;
-  display: grid;
-  grid-template-columns: 25vh 25vh 25vh;
-  grid-gap: 6vh;
+	width: 87vh;
+	display: grid;
+	grid-template-columns: 25vh 25vh 25vh;
+	grid-gap: 6vh;
 }
 
 .tool-item.alt-controls {
-  color: #b3f6ff;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  font-size: 15vh;
-  font-family: "Fredoka One", cursive;
+	color: #b3f6ff;
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	font-size: 15vh;
+	font-family: "Fredoka One", cursive;
 }
 
 .tool-item.alt-controls.undo {
-  background-image: url("./assets/icons/undo.png");
+	background-image: url("./assets/icons/undo.png");
 }
 
 .tool-item.alt-controls.redo {
-  background-image: url("./assets/icons/redo.png");
+	background-image: url("./assets/icons/redo.png");
 }

@@ -1,109 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Choose Background</title>
-    <style>
-        body {
-            width: 100vw;
-            height: 100vh;
-            padding: 0vh;
-            margin: 0px;
-            display: flex;
-        }
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Choose Background</title>
+		<style>
+			body {
+				width: 100vw;
+				height: 100vh;
+				padding: 0vh;
+				margin: 0px;
+				display: flex;
+			}
 
-        #container {
-            margin: auto;
-            width: 95vw;
-            height: 95vh;
-            border-radius: 30px;
-            background-color: rgb(8, 13, 15);
-            display: flex;
-            justify-content: space-around;
-            box-shadow: 0px 0px 10px 2px #000;
-        }
+			#container {
+				margin: auto;
+				width: 95vw;
+				height: 95vh;
+				border-radius: 30px;
+				background-color: rgb(8, 13, 15);
+				display: flex;
+				justify-content: space-around;
+				box-shadow: 0px 0px 10px 2px #000;
+			}
 
-        #main {
-            width: 85vw;
-            height: 87vh;
-            display: grid;
-            grid-template-columns: auto auto;
-            grid-template-rows: auto auto auto auto;
-            grid-gap: 4vmin;
-            margin-top: auto;
-            margin-bottom: auto;
-        }
+			#main {
+				width: 85vw;
+				height: 87vh;
+				display: grid;
+				grid-template-columns: auto auto;
+				grid-template-rows: auto auto auto auto;
+				grid-gap: 4vmin;
+				margin-top: auto;
+				margin-bottom: auto;
+			}
 
-        .item {
-            background-color: indianred;
-            box-shadow: 0px 0px 5px 1px #80caff;
-            border-radius: 15px;
-            transition: all 1s;
-        }
-        .item:hover {
-            cursor: pointer;
-            box-shadow: 0px 0px 10px 2px #ff8f80;
-        }
+			.item {
+				background-color: indianred;
+				box-shadow: 0px 0px 5px 1px #80caff;
+				border-radius: 15px;
+				transition: all 1s;
+			}
+			.item:hover {
+				cursor: pointer;
+				box-shadow: 0px 0px 10px 2px #ff8f80;
+			}
 
-        .item.transparent {
-            background-image: url("./assets/icons/transparent.png");
-            background-size: 250% 400%;
-        }
+			.item.transparent {
+				background-image: url("./assets/icons/transparent.png");
+				background-size: 250% 400%;
+			}
 
-        .item.black {
-            background-color: #000;
-        }
+			.item.black {
+				background-color: #000;
+			}
 
-        .item.white {
-            background-color: #fff;
-        }
+			.item.white {
+				background-color: #fff;
+			}
 
-        .item.blue {
-            background-color: #b4deff;
-        }
+			.item.blue {
+				background-color: #b4deff;
+			}
 
-        .item.red {
-            background-color: #ffb4bd;
-        }
+			.item.red {
+				background-color: #ffb4bd;
+			}
 
-        .item.green {
-            background-color: #b3fdd7;
-        }
+			.item.green {
+				background-color: #b3fdd7;
+			}
 
-        .item.yellow {
-            background-color: #fff2b9;
-        }
+			.item.yellow {
+				background-color: #fff2b9;
+			}
 
-        .item.orange {
-            background-color: #ffad88;
-        }
+			.item.orange {
+				background-color: #ffad88;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="container">
+			<div id="main">
+				<div
+					class="item transparent"
+					col="00000000"
+					bg='url("./assets/icons/transparent.png")'
+				></div>
+				<div class="item black" col="000000" bg="#000000"></div>
+				<div class="item white" col="ffffff" bg="#ffffff"></div>
+				<div class="item red" col="ffb4bd" bg="#ffb4bd"></div>
+				<div class="item blue" col="b4deff" bg="#b4deff"></div>
+				<div class="item yellow" col="fff2b9" bg="#fff2b9"></div>
+				<div class="item green" col="b3fdd7" bg="#b3fdd7"></div>
+				<div class="item orange" col="ffad88" bg="#ffad88"></div>
+			</div>
+		</div>
+	</body>
+	<script>
+		const { ipcRenderer } = require("electron");
+		const jQuery = require("jquery");
+		const $ = jQuery;
 
-    </style>
-</head>
-<body>
-    <div id="container">
-    <div id="main">
-        <div class="item transparent" col="00000000" bg='url("./assets/icons/transparent.png")'></div>
-        <div class="item black" col="000000" bg="#000000"></div>
-        <div class="item white" col="ffffff" bg="#ffffff"></div>
-        <div class="item red" col="ffb4bd" bg="#ffb4bd"></div>
-        <div class="item blue" col="b4deff" bg="#b4deff"></div>
-        <div class="item yellow" col="fff2b9" bg="#fff2b9"></div>
-        <div class="item green" col="b3fdd7" bg="#b3fdd7"></div>
-        <div class="item orange" col="ffad88" bg="#ffad88"></div>
-    </div></div>
-</body>
-<script>
-    const { ipcRenderer } = require("electron")
-    const jQuery = require("jquery");
-    const $ = jQuery;
-
-    $(".item").on('click', (e) => {
-        ipcRenderer.send('bgUpdate', e.target.getAttribute('bg'))
-        ipcRenderer.send('bgSubmit', e.target.getAttribute('col'))
-        window.close()
-    })
-</script>
+		$(".item").on("click", (e) => {
+			ipcRenderer.send("bgUpdate", e.target.getAttribute("bg"));
+			ipcRenderer.send("bgSubmit", e.target.getAttribute("col"));
+			window.close();
+		});
+	</script>
 </html>
