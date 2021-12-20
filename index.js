@@ -6,8 +6,18 @@ const screenshot = require("screenshot-desktop");
 
 function createWindow() {
 	const board = new BrowserWindow({
-		width: screen.getPrimaryDisplay().workAreaSize.width,
-		height: screen.getPrimaryDisplay().workAreaSize.height,
+		width:
+			Math.max(
+				...screen
+					.getAllDisplays()
+					.map((j) => j.workArea.x + j.workArea.width)
+			) - Math.min(...screen.getAllDisplays().map((j) => j.workArea.x)),
+		height:
+			Math.max(
+				...screen
+					.getAllDisplays()
+					.map((j) => j.workArea.y + j.workArea.height)
+			) - Math.min(...screen.getAllDisplays().map((j) => j.workArea.y)),
 		webPreferences: {
 			nodeIntegration: true,
 			devTools: true,
@@ -20,6 +30,14 @@ function createWindow() {
 	board.setAlwaysOnTop(true, "screen");
 	board.loadFile("board.html");
 	board.setResizable(false);
+
+	setTimeout(() => {
+		board.setPosition(
+			Math.min(...screen.getAllDisplays().map((j) => j.workArea.x)),
+			Math.min(...screen.getAllDisplays().map((j) => j.workArea.y))
+		);
+		console.log("set");
+	}, 100);
 
 	const controller = new BrowserWindow({
 		width: Math.floor(
