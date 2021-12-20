@@ -5,30 +5,22 @@ const fs = require("fs");
 const screenshot = require("screenshot-desktop");
 
 function createWindow() {
-	let boards = [];
-	screen.getAllDisplays().forEach((s) => {
-		boards.push(
-			new BrowserWindow({
-				width: s.workArea.width,
-				height: s.workArea.height,
-				webPreferences: {
-					nodeIntegration: true,
-					devTools: true,
-					contextIsolation: false,
-				},
-				transparent: true,
-				frame: false,
-				icon: path.join(__dirname, "/assets/Icon-512x512.png"),
-			})
-		);
-		boards[boards.length - 1].setAlwaysOnTop(true, "screen");
-		boards[boards.length - 1].loadFile("board.html");
-		boards[boards.length - 1].setResizable(false);
-		boards[boards.length - 1].setPosition(s.workArea.x, s.workArea.y);
-		if (boards.length > 1) {
-			boards[boards.length - 1].setParentWindow(boards[0]);
-		}
+	const board = new BrowserWindow({
+		width: screen.getPrimaryDisplay().workAreaSize.width,
+		height: screen.getPrimaryDisplay().workAreaSize.height,
+		webPreferences: {
+			nodeIntegration: true,
+			devTools: true,
+			contextIsolation: false,
+		},
+		transparent: true,
+		frame: false,
+		icon: path.join(__dirname, "/assets/Icon-512x512.png"),
 	});
+	board.setAlwaysOnTop(true, "screen");
+	board.loadFile("board.html");
+	board.setResizable(false);
+
 	const controller = new BrowserWindow({
 		width: Math.floor(
 			screen.getPrimaryDisplay().size.width * (1350 / 1920)
@@ -44,7 +36,7 @@ function createWindow() {
 		transparent: true,
 		frame: false,
 		skipTaskbar: true,
-		parent: boards[0],
+		parent: board,
 		icon: "./assets/logo.png",
 	});
 	controller.setPosition(205, 40);
@@ -66,7 +58,7 @@ function createWindow() {
 			transparent: true,
 			frame: false,
 			skipTaskbar: true,
-			parent: boards[0],
+			parent: board,
 			icon: "./assets/logo.png",
 		});
 		picker.setPosition(x, y);
@@ -89,7 +81,7 @@ function createWindow() {
 			transparent: true,
 			frame: false,
 			skipTaskbar: true,
-			parent: boards[0],
+			parent: board,
 			icon: "./assets/logo.png",
 		});
 		dialog.setPosition(x, y);
@@ -104,44 +96,32 @@ function createWindow() {
 		}
 	});
 
-	boards[0].on("closed", () => {
+	board.on("closed", () => {
 		if (process.platform !== "darwin") {
 			app.quit();
 		}
 	});
 
 	ipcMain.on("resetBoard", () => {
-		for (j in boards) {
-			boards[j].webContents.send("resetBoard");
-		}
+		board.webContents.send("resetBoard");
 	});
 	ipcMain.on("eraserMode", () => {
-		for (j in boards) {
-			boards[j].webContents.send("eraserMode");
-		}
+		board.webContents.send("eraserMode");
 	});
 	ipcMain.on("setMode", (e, arg) => {
-		for (j in boards) {
-			boards[j].webContents.send("setMode", arg);
-		}
+		board.webContents.send("setMode", arg);
 	});
 
 	ipcMain.on("textMode", () => {
-		for (j in boards) {
-			boards[j].webContents.send("textMode");
-		}
+		board.webContents.send("textMode");
 	});
 
 	ipcMain.on("colSelect", (e, arg) => {
-		for (j in boards) {
-			boards[j].webContents.send("colSelectFill", arg);
-			boards[j].webContents.send("colSelectStroke", arg);
-		}
+		board.webContents.send("colSelectFill", arg);
+		board.webContents.send("colSelectStroke", arg);
 	});
 	ipcMain.on("colSelectFill", (e, arg) => {
-		for (j in boards) {
-			boards[j].webContents.send("colSelectFill", arg);
-		}
+		board.webContents.send("colSelectFill", arg);
 	});
 	ipcMain.on("customColor", (e, arg) =>
 		openPicker(
@@ -156,83 +136,57 @@ function createWindow() {
 	});
 
 	ipcMain.on("drawPolygon", () => {
-		for (j in boards) {
-			boards[j].webContents.send("drawPolygon");
-		}
+		board.webContents.send("drawPolygon");
 	});
 	ipcMain.on("drawLine", () => {
-		for (j in boards) {
-			boards[j].webContents.send("drawLine");
-		}
+		board.webContents.send("drawLine");
 	});
 	ipcMain.on("drawSquare", () => {
-		for (j in boards) {
-			boards[j].webContents.send("drawSquare");
-		}
+		board.webContents.send("drawSquare");
 	});
 	ipcMain.on("drawCircle", () => {
-		for (j in boards) {
-			boards[j].webContents.send("drawCircle");
-		}
+		board.webContents.send("drawCircle");
 	});
 	ipcMain.on("drawTriangle", () => {
-		for (j in boards) {
-			boards[j].webContents.send("drawTriangle");
-		}
+		board.webContents.send("drawTriangle");
 	});
 
 	ipcMain.on("drawTick", () => {
-		for (j in boards) {
-			boards[j].webContents.send("drawTick");
-		}
+		board.webContents.send("drawTick");
 	});
 	ipcMain.on("drawCross", () => {
-		for (j in boards) {
-			boards[j].webContents.send("drawCross");
-		}
+		board.webContents.send("drawCross");
 	});
 	ipcMain.on("drawStar", () => {
-		for (j in boards) {
-			boards[j].webContents.send("drawStar");
-		}
+		board.webContents.send("drawStar");
 	});
 	ipcMain.on("drawFreehand", () => {
-		for (j in boards) {
-			boards[j].webContents.send("drawFreehand");
-		}
+		board.webContents.send("drawFreehand");
 	});
 
 	ipcMain.on("dragMode", () => {
-		for (j in boards) {
-			boards[j].webContents.send("setMode", "drag");
-			boards[j].webContents.send("dragMode");
-		}
+		board.webContents.send("setMode", "drag");
+		board.webContents.send("dragMode");
 	});
 
 	ipcMain.on("hideBoard", () => {
-		for (j in boards) {
-			boards[j].hide();
-		}
+		board.hide();
 		controller.setAlwaysOnTop(true, "screen");
 	});
 	ipcMain.on("showBoard", () => {
-		for (j in boards) {
-			boards[j].show();
-		}
+		board.show();
 		controller.hide();
 		controller.show();
 	});
 
 	ipcMain.on("minimizeWin", () => {
-		for (j in boards) {
-			boards[j].show();
-		}
+		board.show();
 		controller.hide();
 		controller.show();
-		boards[0].minimize();
+		board.minimize();
 	});
 	ipcMain.on("closeWin", () => {
-		boards[0].close();
+		board.close();
 	});
 
 	ipcMain.on("bgSelect", (e, arg) =>
@@ -247,35 +201,19 @@ function createWindow() {
 		controller.webContents.send("bgUpdate", arg)
 	);
 	ipcMain.on("bgSubmit", (e, arg) => {
-		for (j in boards) {
-			boards[j].webContents.send("bgSelect", arg);
-			boards[j].focus();
-		}
+		board.webContents.send("bgSelect", arg);
+		board.focus();
 	});
 
-	ipcMain.on("clearBoard", () => {
-		for (j in boards) {
-			boards[j].webContents.send("clearBoard");
-		}
-	});
+	ipcMain.on("clearBoard", () => board.webContents.send("clearBoard"));
 
 	ipcMain.on("laserCursor", () => {
-		for (j in boards) {
-			boards[j].webContents.send("setMode", "laser");
-			boards[j].webContents.send("laserCursor");
-		}
+		board.webContents.send("setMode", "laser");
+		board.webContents.send("laserCursor");
 	});
 
-	ipcMain.on("undo", () => {
-		for (j in boards) {
-			boards[j].webContents.send("undo");
-		}
-	});
-	ipcMain.on("redo", () => {
-		for (j in boards) {
-			boards[j].webContents.send("redo");
-		}
-	});
+	ipcMain.on("undo", () => board.webContents.send("undo"));
+	ipcMain.on("redo", () => board.webContents.send("redo"));
 
 	ipcMain.on("screenshot", () => {
 		let d = new Date();
@@ -307,47 +245,27 @@ function createWindow() {
 				});
 			}
 		});
-		for (j in boards) {
-			boards[j].webContents.send("screenshot");
-		}
+		board.webContents.send("screenshot");
 	});
 
-	ipcMain.on("strokeIncrease", () => {
-		for (j in boards) {
-			boards[j].webContents.send("strokeIncrease");
-		}
-	});
-	ipcMain.on("strokeDecrease", () => {
-		for (j in boards) {
-			boards[j].webContents.send("strokeDecrease");
-		}
-	});
+	ipcMain.on("strokeIncrease", () =>
+		board.webContents.send("strokeIncrease")
+	);
+	ipcMain.on("strokeDecrease", () =>
+		board.webContents.send("strokeDecrease")
+	);
 
-	ipcMain.on("arrowSingle", () => {
-		for (j in boards) {
-			boards[j].webContents.send("arrowSingle");
-		}
-	});
-	ipcMain.on("arrowDouble", () => {
-		for (j in boards) {
-			boards[j].webContents.send("arrowDouble");
-		}
-	});
+	ipcMain.on("arrowSingle", () => board.webContents.send("arrowSingle"));
+	ipcMain.on("arrowDouble", () => board.webContents.send("arrowDouble"));
 
-	ipcMain.on("highlighter", () => {
-		for (j in boards) {
-			boards[j].webContents.send("highlighter");
-		}
-	});
+	ipcMain.on("highlighter", () => board.webContents.send("highlighter"));
 
 	if (os.platform() == "win32") {
 		setTimeout(() => {
-			for (j in boards) {
-				boards[j].minimize();
-				boards[j].restore();
-				boards[j].hide();
-				boards[j].show();
-			}
+			board.minimize();
+			board.restore();
+			board.hide();
+			board.show();
 			controller.hide();
 			controller.show();
 		}, 1000);
