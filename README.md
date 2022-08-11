@@ -6,6 +6,8 @@
 
 # Pensela: The Swiss Army Knife of Screen Annotation Tools
 
+***Note: This Project is no longer being mantained. If you want to take the role of a mantainer open an issue requesting the same and I'll assign it to you.***
+
 ## Features
 
 -   Basic Shapes
